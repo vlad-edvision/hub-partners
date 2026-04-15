@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBC — EDVISION Partner Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --navy-mid: #1a3560;
+    --blue: #1e5fbe;
+    --accent: #e8a020;
+    --accent-light: #f5c355;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+    --text: #0d1f3c;
+    --text-mid: #3a4d6b;
+    --text-muted: #7a8fa8;
+    --border: #dde4ef;
+    --bg-section: #f2f5fb;
+    --internal: #fff8ed;
+    --internal-border: #f5c355;
+    --internal-text: #7a4d00;
+    --margin-bg: #e8f5ee;
+    --margin-text: #1a6640;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --explorer: #7c3aed;
+    --explorer-bg: #f3effe;
+    --adventure: #0369a1;
+    --adventure-bg: #e0f2fe;
+    --college: #b45309;
+    --college-bg: #fef3c7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); background: var(--cream); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  
+
+  .layout { display: flex; min-height: 100vh; }
+
+  .sidebar { width: 220px; flex-shrink: 0; background: var(--navy); padding: 32px 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .sidebar-section-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #5a7aaa; padding: 0 24px 8px; margin-top: 24px; }
+  .sidebar-section-label:first-child { margin-top: 0; }
+  .sidebar a { display: block; padding: 9px 24px; font-size: 13px; color: #a8bcd8; text-decoration: none; transition: all 0.15s; border-left: 3px solid transparent; }
+  .sidebar a:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+  .sidebar a.active { color: var(--white); border-left-color: var(--accent); background: rgba(255,255,255,0.07); }
+  .sidebar a.dim { color: #3a5070; cursor: default; }
+
+  .main { flex: 1; padding: 40px 48px 80px; max-width: 960px; }
+
+  .provider-header { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+  .provider-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .provider-name { font-family: var(--font-display); font-size: 34px; color: var(--navy); line-height: 1.1; margin-bottom: 4px; }
+  .provider-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
+  .provider-url { font-size: 13px; color: var(--blue); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 16px; }
+  .provider-url:hover { text-decoration: underline; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; padding: 4px 12px; border-radius: 100px; }
+  .tag-blue { background: #dceaf9; color: #0d4a99; }
+  .tag-purple { background: #ede9fe; color: #5b21b6; }
+  .tag-amber { background: #fdf0d5; color: #7a4d00; }
+  .tag-teal { background: #d6f0e6; color: #0a5c38; }
+  .tag-gray { background: #e8edf5; color: #3a4d6b; }
+  .tag-red { background: #fee2e2; color: #991b1b; }
+
+  .meta-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .meta-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .meta-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 4px; }
+  .meta-card .value { font-size: 15px; font-weight: 500; color: var(--navy); }
+
+  .section { margin-bottom: 48px; }
+  .section-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+
+  .prog-tabs { display: flex; gap: 6px; margin-bottom: 24px; flex-wrap: wrap; }
+  .prog-tab { padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--white); color: var(--text-mid); transition: all 0.15s; }
+  .prog-tab:hover:not(.active) { border-color: var(--navy-mid); }
+  .prog-tab.explorer.active { background: var(--explorer); color: #fff; border-color: var(--explorer); }
+  .prog-tab.adventure.active { background: var(--adventure); color: #fff; border-color: var(--adventure); }
+  .prog-tab.college.active { background: var(--college); color: #fff; border-color: var(--college); }
+  .prog-content { display: none; }
+  .prog-content.active { display: block; }
+
+  .prog-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; margin-bottom: 14px; }
+  .prog-badge.explorer { background: var(--explorer-bg); color: var(--explorer); }
+  .prog-badge.adventure { background: var(--adventure-bg); color: var(--adventure); }
+  .prog-badge.college { background: var(--college-bg); color: var(--college); }
+
+  .campus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .campus-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 15px 16px; }
+  .campus-name { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+  .campus-loc { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+  .campus-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .campus-pill { font-size: 11px; padding: 2px 8px; border-radius: 100px; background: var(--bg-section); color: var(--text-mid); }
+  .course-list { font-size: 12px; color: var(--text-mid); }
+  .course-list li { list-style: none; padding: 2px 0; }
+  .course-list li::before { content: '→'; margin-right: 6px; color: var(--text-muted); }
+  .excursion-note { font-size: 12px; color: var(--text-muted); margin-top: 8px; border-top: 0.5px solid var(--border); padding-top: 8px; }
+
+  .price-table-wrap { overflow-x: auto; margin-bottom: 16px; }
+  .price-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 560px; }
+  .price-table th { background: var(--navy); color: rgba(255,255,255,0.75); font-weight: 400; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 12px; text-align: left; white-space: nowrap; }
+  .price-table th:first-child { border-radius: 8px 0 0 0; }
+  .price-table th:last-child { border-radius: 0 8px 0 0; }
+  .price-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table tr:nth-child(even) td { background: var(--bg-section); }
+  .price-num { font-weight: 500; white-space: nowrap; color: var(--navy); }
+  .margin-cell { background: var(--margin-bg) !important; color: var(--margin-text); font-weight: 500; font-size: 12px; }
+  .margin-placeholder { font-size: 12px; color: var(--text-muted); font-style: italic; }
+  .price-tbd { font-size: 12px; color: var(--text-muted); font-style: italic; }
+
+  .disclaimer { font-size: 12px; color: var(--text-muted); margin-top: 10px; line-height: 1.6; padding: 10px 14px; background: var(--bg-section); border-radius: 8px; border-left: 3px solid var(--border); }
+
+  .sub-title { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 12px; margin-top: 20px; display: flex; align-items: center; gap: 8px; }
+  .sub-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .collapsible-header { font-size: 13px; font-weight: 500; color: var(--navy); margin-top: 20px; display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; padding: 10px 14px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; transition: background 0.15s; }
+  .collapsible-header:hover { background: var(--bg-section); }
+  .collapsible-header .ch-line { flex: 1; height: 1px; background: var(--border); }
+  .collapsible-header .ch-arrow { font-size: 11px; color: var(--text-muted); transition: transform 0.2s; flex-shrink: 0; }
+  .collapsible-header.open .ch-arrow { transform: rotate(180deg); }
+  .collapsible-body { overflow: hidden; transition: max-height 0.28s ease, opacity 0.2s ease; max-height: 0; opacity: 0; }
+  .collapsible-body.open { max-height: 3000px; opacity: 1; }
+  .collapsible-body .price-table-wrap { margin-top: 12px; }
+
+  .notes-box { background: var(--internal); border: 1px solid var(--internal-border); border-radius: 10px; padding: 16px 20px; font-size: 13px; color: var(--internal-text); line-height: 1.7; }
+  .notes-header { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .notes-row { margin-bottom: 4px; }
+  .notes-row strong { font-weight: 500; }
+
+  .accred-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .accred-badge { font-size: 12px; padding: 4px 12px; border-radius: 100px; background: #d6f0e6; color: #0a5c38; }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 20px 60px; }
+    .meta-strip { grid-template-columns: 1fr 1fr; }
+    .campus-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-section-label">On this page</div>
+    <a href="#overview">Overview</a>
+    <a href="#pathway">Programme pathway</a>
+    <a href="#explorer">Explorer</a>
+    <a href="#adventure">Adventure</a>
+    <a href="#college">College Pathways</a>
+    <a href="#prices">Prices</a>
+    <a href="#booking">Booking</a>
+    <a href="#notes">Internal notes</a>
+  </nav>
+
+  <main class="main">
+
+    <!-- Header -->
+    <div class="provider-header" id="overview">
+      <div class="provider-eyebrow">Academic Summer Schools · Provider Profile</div>
+      <h1 class="provider-name">Summer Boarding Courses</h1>
+      <div class="provider-sub">SBC · Est. 2008 · UK's №1 Summer School · Part of Dukes Education</div>
+      <a class="provider-url" href="https://www.summerboardingcourses.com" target="_blank">summerboardingcourses.com ↗</a>
+      <div class="tags">
+        <span class="tag tag-purple">Explorer · 6–12</span>
+        <span class="tag tag-blue">Adventure · 11–16</span>
+        <span class="tag tag-amber">College Pathways · 13–17</span>
+        <span class="tag tag-teal">Academic · English · Leadership</span>
+        <span class="tag tag-gray">Net price</span>
+        <span class="tag tag-gray">Summer + Easter</span>
+      </div>
+    </div>
+
+    <!-- Meta -->
+    <div class="meta-strip">
+      <div class="meta-card">
+        <div class="label">Business model</div>
+        <div class="value">Net price</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Season</div>
+        <div class="value">June–August · Easter</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Age range</div>
+        <div class="value">6–17 years</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Campuses</div>
+        <div class="value">7 UK locations</div>
+      </div>
+    </div>
+
+    <!-- Accreditations -->
+    <div class="accred-strip">
+      <span class="accred-badge">British Council — 15/15 (perfect score)</span>
+      <span class="accred-badge">EL Gazette Centre of Excellence 2018–2024</span>
+      <span class="accred-badge">BAC Accredited</span>
+      <span class="accred-badge">20,000+ students · 155 nationalities</span>
+    </div>
+
+    <!-- Pathway overview -->
+    <div class="section" id="pathway">
+      <div class="section-title">Programme pathway — how it works</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px;">
+        <div style="background:var(--explorer-bg);border-radius:10px;padding:14px 16px;border:1px solid #ddd6fe;">
+          <div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--explorer);margin-bottom:6px;">Explorer Programmes</div>
+          <div style="font-size:13px;font-weight:500;color:var(--navy);margin-bottom:4px;">Ages 6–12</div>
+          <div style="font-size:12px;color:var(--text-mid);">Day Camps (6–12), Camp Dragon Young Explorers (8–12). First steps abroad, confidence building, English + activities.</div>
+        </div>
+        <div style="background:var(--adventure-bg);border-radius:10px;padding:14px 16px;border:1px solid #bae6fd;">
+          <div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--adventure);margin-bottom:6px;">Adventure Programmes</div>
+          <div style="font-size:13px;font-weight:500;color:var(--navy);margin-bottom:4px;">Ages 11–16</div>
+          <div style="font-size:12px;color:var(--text-mid);">Canford (11–16), Headington Oxford (12–16), Eton College Adventure Plus (12–16). Subject-based learning + activities.</div>
+        </div>
+        <div style="background:var(--college-bg);border-radius:10px;padding:14px 16px;border:1px solid #fde68a;">
+          <div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--college);margin-bottom:6px;">College Pathways</div>
+          <div style="font-size:13px;font-weight:500;color:var(--navy);margin-bottom:4px;">Ages 13–17</div>
+          <div style="font-size:12px;color:var(--text-mid);">Earlscliffe (13–17), Dukes Cambridge (14–17), Oxford College (15–17). Pre-university, guest speakers, industry experience.</div>
+        </div>
+      </div>
+      <div class="disclaimer">All programmes run June–August 2026. Earlscliffe also offers an Easter English Language programme (ages 8–17).</div>
+    </div>
+
+    <!-- Explorer -->
+    <div class="section" id="explorer">
+      <div class="section-title">Explorer Programmes</div>
+      <div class="prog-badge explorer">For younger learners · Ages 6–12</div>
+
+      <div class="sub-title">Day Camps — London, Oxford & Kingston</div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:16px;font-size:13px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <div style="font-weight:500;color:var(--navy);margin-bottom:6px;">Ages 6–12 · All levels · Non-residential</div>
+            <div style="color:var(--text-mid);">10 lessons/week (2×50 min daily). Max class 12. English + 40+ activities: archery, football, swimming, drama, arts, outdoor adventure. Mix with local English children.</div>
+          </div>
+          <div>
+            <div style="font-weight:500;color:var(--navy);margin-bottom:6px;">What's included</div>
+            <div style="color:var(--text-mid);">English lessons · 40+ activities · End-of-course report & certificate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title">Camp Dragon — Dragon School, Oxford</div>
+      <div class="campus-grid" style="grid-template-columns:1fr;">
+        <div class="campus-card">
+          <div class="campus-name">Camp Dragon · Dragon School, Oxford</div>
+          <div class="campus-loc">Oxford · Est. 1877</div>
+          <div class="campus-meta">
+            <span class="campus-pill">Ages 8–12</span>
+            <span class="campus-pill">A2+ English</span>
+            <span class="campus-pill">15 hrs/week</span>
+            <span class="campus-pill">Residential or Day</span>
+            <span class="campus-pill">2 & 4 weeks</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-mid);margin-bottom:8px;">Young Explorers programme: English, Maths, Science & History through 4 stages (Discover, Develop, Dare, Showtime). Shared dormitories, 24/7 staff, separate boys/girls housing.</div>
+          <div class="excursion-note"><strong>Start dates:</strong> 13 Jul & 27 Jul 2026 &nbsp;·&nbsp; <strong>Excursions:</strong> Oxford Adventure · Warwick Castle (wk 1) · Legoland (wk 2) · Harry Potter Studios (optional extra)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Adventure -->
+    <div class="section" id="adventure">
+      <div class="section-title">Adventure Programmes</div>
+      <div class="prog-badge adventure">Project-based learning + activities · Ages 11–16</div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">15 hrs/week academic (subject lessons + Time to Shine project). Afternoons: multi-activity + optional extras. Max class 15. Certificate & reference letter included.</p>
+
+      <div class="campus-grid">
+        <div class="campus-card">
+          <div class="campus-name">SBC at Canford</div>
+          <div class="campus-loc">Bournemouth, Dorset · 250-acre campus</div>
+          <div class="campus-meta">
+            <span class="campus-pill">Ages 11–16</span>
+            <span class="campus-pill">All levels</span>
+            <span class="campus-pill">15 hrs/week</span>
+            <span class="campus-pill">2–4 weeks</span>
+          </div>
+          <ul class="course-list">
+            <li>Future Entrepreneurs (B1+)</li>
+            <li>Future Scientists / STEM (B1+)</li>
+            <li>Future Artists (B1+)</li>
+            <li>English Adventurers (A1+)</li>
+            <li>Future Global Leaders (B1+)</li>
+          </ul>
+          <div class="excursion-note"><strong>Start dates:</strong> 29 Jun, 13 Jul, 20 Jul 2026 &nbsp;·&nbsp; <strong>Excursions:</strong> London sightseeing · Bournemouth beach · Splashdown water park</div>
+        </div>
+
+        <div class="campus-card">
+          <div class="campus-name">Headington Oxford</div>
+          <div class="campus-loc">Oxford · Headington School</div>
+          <div class="campus-meta">
+            <span class="campus-pill">Ages 12–16</span>
+            <span class="campus-pill">A2+ English</span>
+            <span class="campus-pill">15 hrs/week</span>
+            <span class="campus-pill">2–4 weeks</span>
+          </div>
+          <ul class="course-list">
+            <li>Future Entrepreneurs (B1+)</li>
+            <li>Future Scientists / STEM (B1+)</li>
+            <li>Future Doctors (B1+)</li>
+            <li>Future Global Leaders (B1+)</li>
+            <li>English Adventurers (A2+)</li>
+          </ul>
+          <div class="excursion-note"><strong>Start dates:</strong> 6 Jul, 20 Jul, 27 Jul 2026 &nbsp;·&nbsp; <strong>Excursions:</strong> London sightseeing · Oxford · Thorpe Park</div>
+        </div>
+
+        <div class="campus-card" style="border-color:#e9d9fc;">
+          <div class="campus-name">SBC at Eton College</div>
+          <div class="campus-loc">Windsor, Berkshire · Adventure Programme Plus</div>
+          <div class="campus-meta">
+            <span class="campus-pill">Ages 12–16</span>
+            <span class="campus-pill">B1+ English</span>
+            <span class="campus-pill">20 hrs/week</span>
+            <span class="campus-pill">1–3 weeks</span>
+          </div>
+          <ul class="course-list">
+            <li>Future Entrepreneurs</li>
+            <li>Future Scientists</li>
+            <li>Future Global Leaders</li>
+          </ul>
+          <div class="excursion-note"><strong>Start dates:</strong> 29 Jun, 6 Jul, 13 Jul 2026 &nbsp;·&nbsp; <strong>Excursions:</strong> London · Windsor Castle · Kew Gardens & Westfield · Eton town</div>
+        </div>
+
+        <div class="campus-card">
+          <div class="campus-name">Dulwich College</div>
+          <div class="campus-loc">London, South East · <em>not in prospectus — confirmed via price list</em></div>
+          <div class="campus-meta">
+            <span class="campus-pill">Ages 12–14</span>
+            <span class="campus-pill">2 weeks</span>
+          </div>
+          <div class="excursion-note"><strong>Start dates:</strong> 6 Jul & 20 Jul 2026 &nbsp;·&nbsp; <strong>Courses:</strong> — to confirm with SBC</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- College Pathways -->
+    <div class="section" id="college">
+      <div class="section-title">College Pathways — Pre-University</div>
+      <div class="prog-badge college">Academic + career prep · Ages 13–17</div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">20–25 hrs/week. Guest speakers, fieldwork, industry experience, Time to Shine projects, letter of reference + certificate. Ideal for university application boost.</p>
+
+      <div class="campus-grid">
+        <div class="campus-card">
+          <div class="campus-name">Earlscliffe</div>
+          <div class="campus-loc">Folkestone, Kent · UNESCO-accredited school</div>
+          <div class="campus-meta">
+            <span class="campus-pill">Ages 13–17</span>
+            <span class="campus-pill">A2+ English</span>
+            <span class="campus-pill">20 hrs/week</span>
+            <span class="campus-pill">1–4 weeks</span>
+            <span class="campus-pill">Max class 12</span>
+          </div>
+          <ul class="course-list">
+            <li>Think Global! (13–17 · A2+)</li>
+            <li>Sustainable Futures / Science & Tech (14–17 · B1+)</li>
+            <li>Global Leadership (14–17 · B1+)</li>
+            <li>Business: Mini MBA™ (14–17 · B2+)</li>
+            <li>University Preparation (16–17 · B2+)</li>
+          </ul>
+          <div class="excursion-note"><strong>Start dates:</strong> 29 Jun, 13 Jul, 20 Jul, 27 Jul, 3 Aug 2026 &nbsp;·&nbsp; <strong>Excursions:</strong> London · Thorpe Park · Canterbury</div>
+        </div>
+
+        <div class="campus-card">
+          <div class="campus-name">Dukes Cambridge</div>
+          <div class="campus-loc">Cambridge · City-campus (3 school sites)</div>
+          <div class="campus-meta">
+            <span class="campus-pill">Ages 14–17</span>
+            <span class="campus-pill">B1+ English</span>
+            <span class="campus-pill">20 hrs/week</span>
+            <span class="campus-pill">2 & 4 weeks</span>
+            <span class="campus-pill">2× excursions/week</span>
+          </div>
+          <ul class="course-list">
+            <li>Faculty of Business (B1+)</li>
+            <li>Faculty of Medicine (B1+)</li>
+            <li>Faculty of Science & Technology / STEM (B1+)</li>
+            <li>Faculty of Psychology (B1+)</li>
+            <li>Faculty of Art & Design (B1+)</li>
+            <li>English Pathways (B1+)</li>
+          </ul>
+          <div class="excursion-note"><strong>Start dates:</strong> 29 Jun, 13 Jul, 27 Jul 2026 &nbsp;·&nbsp; <strong>Excursions:</strong> London · Cambridge city & punting</div>
+        </div>
+
+        <div class="campus-card" style="border-color:#fde68a;">
+          <div class="campus-name">Oxford College</div>
+          <div class="campus-loc">Oxford · University of Oxford college</div>
+          <div class="campus-meta">
+            <span class="campus-pill">Ages 15–17</span>
+            <span class="campus-pill">B1+ English</span>
+            <span class="campus-pill">25 hrs/week</span>
+            <span class="campus-pill">2 & 4 weeks</span>
+            <span class="campus-pill">2× excursions/week</span>
+          </div>
+          <ul class="course-list">
+            <li>Faculty of Business (B1+)</li>
+            <li>Faculty of Medicine (B1+)</li>
+            <li>Faculty of Law (B1+)</li>
+            <li>Faculty of Global Leadership (B1+)</li>
+          </ul>
+          <div class="excursion-note"><strong>Start dates:</strong> 6 Jul, 20 Jul, 3 Aug 2026 &nbsp;·&nbsp; <strong>Excursions:</strong> London · Oxford punting & city</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prices -->
+    <div class="section" id="prices">
+      <div class="section-title">Prices 2026 — Published retail (GBP) · Prices are retail/gross — our margin to be added on top</div>
+
+      <div class="collapsible-header" onclick="toggleCollapse(this)">
+        Camp Dragon · Ages 8–12 · Dragon School Oxford
+        <span class="ch-line"></span><span class="ch-arrow">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>Residential</th><th>Non-residential</th><th style="background:#1a3560">Our margin</th></tr></thead>
+            <tbody>
+              <tr><td>Mon 13 Jul</td><td>Mon 27 Jul</td><td>2 weeks</td><td class="price-num">£3,995</td><td class="price-num">£2,395</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 27 Jul</td><td>Mon 10 Aug</td><td>2 weeks</td><td class="price-num">£3,995</td><td class="price-num">£2,395</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="collapsible-header" onclick="toggleCollapse(this)">
+        SBC Canford · Ages 11–16 · Bournemouth
+        <span class="ch-line"></span><span class="ch-arrow">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>English Adventures — Residential</th><th>English Adventures — Non-residential</th><th style="background:#1a3560">Our margin</th></tr></thead>
+            <tbody>
+              <tr><td>Mon 29 Jun</td><td>Mon 13 Jul</td><td>2 weeks</td><td class="price-num">£3,750</td><td class="price-num">£2,250</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 29 Jun</td><td>Mon 20 Jul</td><td>3 weeks</td><td class="price-num">£5,625</td><td class="price-num">£3,375</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 29 Jun</td><td>Mon 27 Jul</td><td>4 weeks</td><td class="price-num">£7,500</td><td class="price-num">£4,500</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 13 Jul</td><td>Mon 27 Jul</td><td>2 weeks</td><td class="price-num">£3,750</td><td class="price-num">£3,000</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 13 Jul</td><td>Mon 3 Aug</td><td>3 weeks</td><td class="price-num">£5,625</td><td class="price-num">£3,375</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 20 Jul</td><td>Mon 3 Aug</td><td>2 weeks</td><td class="price-num">£3,750</td><td class="price-num">£2,250</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="collapsible-header" onclick="toggleCollapse(this)">
+        Headington Oxford · Ages 12–16 · Oxford
+        <span class="ch-line"></span><span class="ch-arrow">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>English Adventures — Residential</th><th>English Adventures — Non-residential</th><th style="background:#1a3560">Our margin</th></tr></thead>
+            <tbody>
+              <tr><td>Mon 6 Jul</td><td>Mon 20 Jul</td><td>2 weeks</td><td class="price-num">£4,095</td><td class="price-num">£2,450</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 6 Jul</td><td>Mon 27 Jul</td><td>3 weeks</td><td class="price-num">£6,142.50</td><td class="price-num">£3,675</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 6 Jul</td><td>Mon 3 Aug</td><td>4 weeks</td><td class="price-num">£8,190</td><td class="price-num">£4,900</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 20 Jul</td><td>Mon 3 Aug</td><td>2 weeks</td><td class="price-num">£4,095</td><td class="price-num">£2,450</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 20 Jul</td><td>Mon 10 Aug</td><td>3 weeks</td><td class="price-num">£6,142.50</td><td class="price-num">£3,675</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 27 Jul</td><td>Mon 10 Aug</td><td>2 weeks</td><td class="price-num">£4,095</td><td class="price-num">£2,450</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="collapsible-header" onclick="toggleCollapse(this)">
+        SBC at Eton College · Ages 12–16 · Windsor
+        <span class="ch-line"></span><span class="ch-arrow">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>Residential</th><th>Non-residential</th><th style="background:#1a3560">Our margin</th></tr></thead>
+            <tbody>
+              <tr><td>Mon 29 Jun</td><td>Mon 6 Jul</td><td>1 week</td><td class="price-num">£2,950</td><td class="price-num">£2,360</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 29 Jun</td><td>Mon 13 Jul</td><td>2 weeks</td><td class="price-num">£5,895</td><td class="price-num">£4,716</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 29 Jun</td><td>Mon 20 Jul</td><td>3 weeks</td><td class="price-num">£8,750</td><td class="price-num">£7,000</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 6 Jul</td><td>Mon 13 Jul</td><td>1 week</td><td class="price-num">£2,950</td><td class="price-num">£2,360</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 6 Jul</td><td>Mon 20 Jul</td><td>2 weeks</td><td class="price-num">£5,895</td><td class="price-num">£4,716</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 13 Jul</td><td>Mon 20 Jul</td><td>1 week</td><td class="price-num">£2,950</td><td class="price-num">£2,360</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="collapsible-header" onclick="toggleCollapse(this)">
+        Dulwich College · Ages 12–14 · London
+        <span class="ch-line"></span><span class="ch-arrow">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>Non-residential</th><th>Residential</th><th>Residential with ensuite</th><th style="background:#1a3560">Our margin</th></tr></thead>
+            <tbody>
+              <tr><td>Mon 6 Jul</td><td>Mon 20 Jul</td><td>2 weeks</td><td class="price-num">£2,450</td><td class="price-num">£5,495</td><td class="price-num">£5,695</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 20 Jul</td><td>Mon 3 Aug</td><td>2 weeks</td><td class="price-num">£2,450</td><td class="price-num">£5,495</td><td class="price-num">£5,695</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="collapsible-header" onclick="toggleCollapse(this)">
+        Earlscliffe · Ages 13–17 · Folkestone, Kent
+        <span class="ch-line"></span><span class="ch-arrow">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>Think Global! — Residential</th><th>Think Global! — Non-res.</th><th>Business: Mini-MBA — Residential</th><th style="background:#1a3560">Our margin</th></tr></thead>
+            <tbody>
+              <tr><td>Mon 29 Jun</td><td>Mon 13 Jul</td><td>2 weeks</td><td class="price-num">£3,495</td><td class="price-num">£1,677.60</td><td class="price-num">£3,795</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 29 Jun</td><td>Mon 20 Jul</td><td>3 weeks</td><td class="price-num">£5,242.50</td><td class="price-num">£2,516.40</td><td class="price-num">—</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 29 Jun</td><td>Mon 27 Jul</td><td>4 weeks</td><td class="price-num">£6,990</td><td class="price-num">£3,355.20</td><td class="price-num">—</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 13 Jul</td><td>Mon 27 Jul</td><td>2 weeks</td><td class="price-num">£3,495</td><td class="price-num">£1,677.60</td><td class="price-num">£3,795</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 13 Jul</td><td>Mon 3 Aug</td><td>3 weeks</td><td class="price-num">£5,242.50</td><td class="price-num">£2,516.40</td><td class="price-num">—</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 13 Jul</td><td>Mon 10 Aug</td><td>4 weeks</td><td class="price-num">£6,990</td><td class="price-num">£3,355.20</td><td class="price-num">—</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 20 Jul</td><td>Mon 3 Aug</td><td>2 weeks</td><td class="price-num">£3,495</td><td class="price-num">£1,677.60</td><td class="price-num">—</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 27 Jul</td><td>Mon 10 Aug</td><td>2 weeks</td><td class="price-num">£3,495</td><td class="price-num">£1,677.60</td><td class="price-num">£3,795</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 3 Aug</td><td>Mon 17 Aug</td><td>2 weeks</td><td class="price-num">£3,495</td><td class="price-num">£1,677.60</td><td class="price-num">—</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 29 Jun</td><td>Mon 17 Aug</td><td>1–4 wks</td><td colspan="2" style="font-style:italic;color:var(--text-muted)">£1,747.50 per week (flexible)</td><td class="price-num">—</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="collapsible-header" onclick="toggleCollapse(this)">
+        Dukes Cambridge · Ages 14–17 · Cambridge
+        <span class="ch-line"></span><span class="ch-arrow">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>English Pathways — Residential</th><th>English Pathways — Non-res.</th><th>All other courses — Residential</th><th style="background:#1a3560">Our margin</th></tr></thead>
+            <tbody>
+              <tr><td>Mon 29 Jun</td><td>Mon 13 Jul</td><td>2 weeks</td><td class="price-num">£4,395</td><td class="price-num">£2,639</td><td class="price-num">£4,895</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 29 Jun</td><td>Mon 27 Jul</td><td>4 weeks</td><td class="price-num">£8,790</td><td class="price-num">£5,278</td><td class="price-num">£9,790</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 13 Jul</td><td>Mon 27 Jul</td><td>2 weeks</td><td class="price-num">£4,395</td><td class="price-num">£2,639</td><td class="price-num">£4,895</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 13 Jul</td><td>Mon 10 Aug</td><td>4 weeks</td><td class="price-num">£8,790</td><td class="price-num">£5,278</td><td class="price-num">£9,790</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 27 Jul</td><td>Mon 10 Aug</td><td>2 weeks</td><td class="price-num">£4,395</td><td class="price-num">£2,639</td><td class="price-num">£4,895</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="collapsible-header" onclick="toggleCollapse(this)">
+        Oxford College · Ages 15–17 · Oxford University
+        <span class="ch-line"></span><span class="ch-arrow">▼</span>
+      </div>
+      <div class="collapsible-body">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Start date</th><th>End date</th><th>Duration</th><th>Residential</th><th>Non-residential</th><th style="background:#1a3560">Our margin</th></tr></thead>
+            <tbody>
+              <tr><td>Mon 6 Jul</td><td>Mon 20 Jul</td><td>2 weeks</td><td class="price-num">£6,695</td><td class="price-num">£3,995</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 6 Jul</td><td>Mon 3 Aug</td><td>4 weeks</td><td class="price-num">£13,390</td><td class="price-num">£7,990</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 20 Jul</td><td>Mon 3 Aug</td><td>2 weeks</td><td class="price-num">£6,695</td><td class="price-num">£3,995</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 20 Jul</td><td>Mon 17 Aug</td><td>4 weeks</td><td class="price-num">£13,390</td><td class="price-num">£7,990</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+              <tr><td>Mon 3 Aug</td><td>Mon 17 Aug</td><td>2 weeks</td><td class="price-num">£6,695</td><td class="price-num">£3,995</td><td class="margin-cell"><span class="margin-placeholder">— to add</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="disclaimer">Prices shown are published retail prices from summerboardingcourses.com. These are gross/retail — our net price agreement determines actual cost to us. Margin column to be filled once agreement terms confirmed. Prices include tuition, accommodation (residential), meals, and excursions. Optional extras cost additional. Airport transfers (Heathrow & St Pancras) available for an additional fee.</div>
+    </div>
+
+    <!-- Booking -->
+    <div class="section" id="booking">
+      <div class="section-title">Booking process</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:13px;">
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 14px;">
+          <div style="font-weight:500;color:var(--navy);margin-bottom:4px;">1. Course selection</div>
+          <div style="color:var(--text-muted);">Via website or admissions manager</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 14px;">
+          <div style="font-weight:500;color:var(--navy);margin-bottom:4px;">2. Deposit</div>
+          <div style="color:var(--text-muted);">£700 to secure place</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 14px;">
+          <div style="font-weight:500;color:var(--navy);margin-bottom:4px;">3. Full payment</div>
+          <div style="color:var(--text-muted);">Due 1 May 2026 · Post-May = full payment at booking</div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 14px;">
+          <div style="font-weight:500;color:var(--navy);margin-bottom:4px;">4. Pre-arrival</div>
+          <div style="color:var(--text-muted);">Medical info, English placement test, welcome pack</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Internal Notes -->
+    <div class="section" id="notes">
+      <div class="section-title">Internal Notes</div>
+      <div class="notes-box">
+        
+        <div class="notes-row"><strong>Business model:</strong> Net price — we buy at net, sell at our price. Prices above are published retail. Our actual cost = retail minus agreed discount. Margin column to fill once net price terms confirmed.</div>
+        <div class="notes-row"><strong>Dulwich College:</strong> Appears in price list (ages 12–14, 2-week only) but not in the prospectus. Confirm course details directly with SBC before selling.</div>
+        <div class="notes-row"><strong>Contact:</strong> — to add</div>
+        <div class="notes-row"><strong>Key selling points:</strong> UK's №1 summer school (British Council 15/15). Eton College campus strong premium sell. Oxford College = actual Oxford University setting. Huge course variety — widest subject selection of all our partners. Strong brand recognition, especially for UAE/Middle East clients.</div>
+        <div class="notes-row"><strong>Accreditation:</strong> British Council (perfect score), BAC, EL Gazette Centre of Excellence 2018–2024. Strong credibility for visa applications.</div>
+        <div class="notes-row"><strong>Notes:</strong> SBC is part of Dukes Education group — also offers year-round consultancy (Oxbridge Applications, The Medic Portal, A-List Education, Dukes Tutoring). Could be cross-sell opportunity.</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function switchProg(id, btn) {
+    document.querySelectorAll('.prog-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.prog-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('prog-' + id).classList.add('active');
+  }
+  function toggleCollapse(header) {
+    const body = header.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    header.classList.toggle('open', !isOpen);
+  }
+</script>
+</body>
+</html>

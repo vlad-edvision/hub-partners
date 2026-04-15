@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stafford House — EDVISION Partner Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#0d1f3c;--blue:#1e5fbe;--accent:#e8a020;--accent-light:#f5c355;
+    --cream:#f8f5f0;--white:#ffffff;--text:#0d1f3c;--text-mid:#3a4d6b;
+    --text-muted:#7a8fa8;--border:#dde4ef;--bg-section:#f2f5fb;
+    --internal:#fff8ed;--internal-border:#f5c355;--internal-text:#7a4d00;
+    --margin-bg:#e8f5ee;--margin-text:#1a6640;
+    --font-display:'DM Serif Display',Georgia,serif;
+    --font-body:'DM Sans',system-ui,sans-serif;
+    --cambridge:#7c3aed;--cambridge-bg:#f3effe;
+    --canterbury:#0369a1;--canterbury-bg:#e0f2fe;
+    --london:#be185d;--london-bg:#fce7f3;
+    --northampton:#b45309;--northampton-bg:#fef3c7;
+    --oakham:#1a6640;--oakham-bg:#e8f5ee;
+    --boston:#0e7490;--boston-bg:#e0f7fa;
+    --newyork:#6b21a8;--newyork-bg:#f5f3ff;
+    --sf:#b91c1c;--sf-bg:#fee2e2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--font-body);background:var(--cream);color:var(--text);font-size:15px;line-height:1.6;}
+  
+  .layout{display:flex;min-height:100vh;}
+  .sidebar{width:220px;flex-shrink:0;background:var(--navy);padding:32px 0;position:sticky;top:0;height:100vh;overflow-y:auto;}
+  .sidebar-section-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#5a7aaa;padding:0 24px 8px;margin-top:24px;}
+  .sidebar-section-label:first-child{margin-top:0;}
+  .sidebar a{display:block;padding:9px 24px;font-size:13px;color:#a8bcd8;text-decoration:none;transition:all .15s;border-left:3px solid transparent;}
+  .sidebar a:hover{color:var(--white);background:rgba(255,255,255,.05);border-left-color:var(--accent);}
+  .main{flex:1;padding:40px 48px;max-width:980px;}
+  /* hero */
+  .hero{background:var(--navy);border-radius:12px;padding:36px 40px;margin-bottom:32px;display:flex;align-items:flex-start;gap:32px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(232,160,32,.15) 0%,transparent 70%);border-radius:50%;}
+  .logo-box{width:80px;height:80px;background:var(--white);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display);font-size:11px;color:var(--navy);text-align:center;line-height:1.3;padding:8px;}
+  .pname{font-family:var(--font-display);font-size:28px;color:var(--white);margin-bottom:8px;}
+  .ptagline{font-size:14px;color:#a8bcd8;margin-bottom:16px;}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;}
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:500;}
+  .ba{background:rgba(232,160,32,.2);color:var(--accent-light);}
+  .bb{background:rgba(30,95,190,.3);color:#90beff;}
+  .bg{background:rgba(26,102,64,.3);color:#7dd4a8;}
+  /* internal note */
+  .inote{background:var(--internal);border:1px solid var(--internal-border);border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;}
+  .inote-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+  .inote-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--internal-text);margin-bottom:4px;}
+  .inote p{font-size:13px;color:var(--internal-text);}
+  /* section */
+  .section{margin-bottom:48px;}
+  .section-title{font-family:var(--font-display);font-size:20px;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border);}
+  /* quick facts */
+  .qfacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:12px;margin-bottom:32px;}
+  .qfact{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+  .ql{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+  .qv{font-size:14px;font-weight:500;color:var(--text);}
+  /* programme overview */
+  .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px;}
+  .pcard{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+  .pcard-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .picon{font-size:18px;}
+  .pname2{font-weight:500;color:var(--navy);font-size:14px;}
+  .pdesc{font-size:13px;color:var(--text-mid);margin-bottom:10px;}
+  .ptags{display:flex;flex-wrap:wrap;gap:6px;}
+  .ptag{font-size:11px;padding:2px 8px;border-radius:12px;background:var(--bg-section);color:var(--text-muted);border:1px solid var(--border);}
+  /* location */
+  .lcard{background:var(--white);border:1px solid var(--border);border-radius:10px;margin-bottom:20px;overflow:hidden;}
+  .lhdr{padding:18px 24px;display:flex;align-items:flex-start;gap:14px;border-bottom:1px solid var(--border);background:var(--bg-section);}
+  .ldot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+  .ltitle{font-family:var(--font-display);font-size:18px;color:var(--navy);}
+  .lsub{font-size:12px;color:var(--text-muted);margin-top:2px;}
+  .lbody{padding:20px 24px;}
+  /* loc meta */
+  .lmeta{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px;}
+  .lmi{font-size:13px;color:var(--text-mid);}
+  .lmi strong{color:var(--text-muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:2px;}
+  /* prog pills */
+  .apills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+  .apill{font-size:12px;padding:3px 10px;border-radius:20px;font-weight:500;}
+  /* collapsible */
+  .ctrig{width:100%;background:var(--bg-section);border:1px solid var(--border);border-radius:8px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;transition:background .15s;text-align:left;}
+  .ctrig:hover{background:#e8edf6;}
+  .ctrig .arr{transition:transform .2s;color:var(--text-muted);font-size:12px;flex-shrink:0;}
+  .ctrig.open .arr{transform:rotate(180deg);}
+  .cbody{display:none;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;overflow:hidden;margin-bottom:12px;}
+  .cbody.open{display:block;}
+  /* course table */
+  .ctbl{width:100%;border-collapse:collapse;font-size:13px;}
+  .ctbl th{background:var(--bg-section);padding:9px 12px;text-align:left;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid var(--border);}
+  .ctbl td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text-mid);vertical-align:top;}
+  .ctbl tr:last-child td{border-bottom:none;}
+  .cn{font-weight:500;color:var(--text);}
+  .cd{font-size:11px;color:var(--text-muted);margin-top:2px;}
+  .pc{font-weight:600;color:var(--navy);white-space:nowrap;}
+  .pm{display:inline-block;background:var(--margin-bg);color:var(--margin-text);font-size:12px;font-weight:500;padding:2px 8px;border-radius:4px;}
+  .na{color:var(--text-muted);}
+  /* region header */
+  .rhdr{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .rflag{font-size:22px;}
+  .rlabel{font-family:var(--font-display);font-size:16px;color:var(--navy);}
+  .rdiv{flex:1;height:1px;background:var(--border);}
+  .infonote{background:var(--bg-section);border-radius:8px;padding:12px 16px;font-size:12px;color:var(--text-mid);margin-bottom:16px;border:1px solid var(--border);}
+  /* fees */
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .fcard{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+  .ftitle{font-weight:500;color:var(--navy);font-size:14px;margin-bottom:8px;}
+  .frow{display:flex;justify-content:space-between;font-size:13px;color:var(--text-mid);padding:5px 0;border-bottom:1px solid var(--border);}
+  .frow:last-child{border-bottom:none;}
+  .famt{font-weight:500;color:var(--text);}
+  /* incl */
+  .igrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .ibox{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;}
+  .ibox-t{font-weight:500;color:var(--navy);margin-bottom:8px;font-size:14px;}
+  .ibox ul{padding-left:16px;}
+  .ibox li{font-size:13px;color:var(--text-mid);margin-bottom:4px;}
+  @media(max-width:800px){.layout{flex-direction:column;}.sidebar{width:100%;height:auto;position:static;}.main{padding:24px 20px;}.pgrid,.fgrid,.igrid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sidebar-section-label">Provider</div>
+  <a href="#overview">Overview</a>
+  <a href="#programmes">Programme Types</a>
+  <a href="#fees">Additional Fees</a>
+  <div class="sidebar-section-label">🇬🇧 UK Locations</div>
+  <a href="#csvpa">Cambridge CSVPA</a>
+  <a href="#cats">Cambridge CATS</a>
+  <a href="#canterbury">Canterbury</a>
+  <a href="#london">London Bloomsbury</a>
+  <a href="#northampton">Northampton</a>
+  <a href="#oakham">Oakham</a>
+  <div class="sidebar-section-label">🇺🇸 USA Locations</div>
+  <a href="#boston">Boston</a>
+  <a href="#newyork">New York</a>
+  <a href="#sf">San Francisco</a>
+  <div class="sidebar-section-label">Info</div>
+  <a href="#inclusions">What's Included</a>
+  <a href="#notes">Internal Notes</a>
+</nav>
+<main class="main">
+
+<!-- HERO -->
+<div class="hero" id="overview">
+  <div class="logo-box">Stafford<br>House<br>Study<br>Holidays</div>
+  <div>
+    <div class="pname">Stafford House Study Holidays</div>
+    <div class="ptagline">Premium summer study holidays — UK, USA &amp; beyond. Individuals aged 12–17. Part of CATS Global Schools.</div>
+    <div class="badges">
+      <span class="badge ba">Ages 12–17 (individuals)</span>
+      <span class="badge bb">Net Price</span>
+      <span class="badge bb">Summer 2026</span>
+      <span class="badge bg">British Council Accredited</span>
+      <span class="badge bg">CATS Global Schools</span>
+    </div>
+  </div>
+</div>
+
+<div class="inote">
+  <div class="inote-icon">🔒</div>
+  <div>
+    <div class="inote-label">Commercial Note</div>
+    <p>Net price model — prices shown are gross (client-facing). Our margin = TBD. <strong>Individual prices include £200 registration fee (UK) / $250 (USA)</strong> and shared return transfers from London airports or St Pancras. Arrivals 9am–5pm strictly. Outside these hours/locations incur extra transfer charge.</p>
+  </div>
+</div>
+
+<div class="qfacts">
+  <div class="qfact"><div class="ql">Individual Ages</div><div class="qv">12–17 years</div></div>
+  <div class="qfact"><div class="ql">Season</div><div class="qv">28 Jun – 09 Aug 2026</div></div>
+  <div class="qfact"><div class="ql">Arrival Day</div><div class="qv">Sunday</div></div>
+  <div class="qfact"><div class="ql">Class Size</div><div class="qv">Max 16 students</div></div>
+  <div class="qfact"><div class="ql">Pricing Model</div><div class="qv">Gross (margin TBD)</div></div>
+  <div class="qfact"><div class="ql">Reservations</div><div class="qv" style="font-size:12px;">reservations@staffordhouse.com</div></div>
+  <div class="qfact"><div class="ql">Phone</div><div class="qv">+44 (0)1227 787730</div></div>
+  <div class="qfact"><div class="ql">Website</div><div class="qv"><a href="https://www.studyholidays.com" target="_blank" style="color:var(--blue);">studyholidays.com</a></div></div>
+</div>
+
+<!-- PROGRAMME TYPES -->
+<div class="section" id="programmes">
+  <div class="section-title">Programme Types</div>
+  <p style="font-size:13px;color:var(--text-mid);margin-bottom:20px;">Four main categories of individual programmes. Each type is available at specific locations — see location cards below for exact availability and pricing.</p>
+  <div class="pgrid">
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="picon">🗣</span><span class="pname2">English Language — Classic Course</span></div>
+      <div class="pdesc">Core English tuition with a full social programme — supervised excursions, sports, arts and evening activities. Most widely available programme. Students placed by level on arrival. Available across all UK and USA locations.</div>
+      <div class="ptags"><span class="ptag">15h English/week</span><span class="ptag">1 full-day excursion/week</span><span class="ptag">7 eve activities/week</span><span class="ptag">Certificate included</span><span class="ptag">1–8 weeks</span><span class="ptag">All levels</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="picon">🎨</span><span class="pname2">Creative Arts — CSVPA Cambridge</span></div>
+      <div class="pdesc">Specialist arts and performing arts programmes at the Cambridge School of Visual &amp; Performing Arts. 30 specialist hours per week. Unique product — not available at other centres. Covers Fashion, Film, Acting, Music, Design, Animation and more. Strong for students targeting UK art school applications.</div>
+      <div class="ptags"><span class="ptag">30h specialist/week</span><span class="ptag">1 full-day excursion/week</span><span class="ptag">Ages 14–18</span><span class="ptag">1–2 weeks</span><span class="ptag">Cambridge only</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="picon">🎓</span><span class="pname2">Academic &amp; Specialist Courses</span></div>
+      <div class="pdesc">Subject-focused programmes for specific academic or professional goals. Includes: STEM &amp; English for Science (Cambridge &amp; London), Bloomberg Business Advantage (London — Bloomberg Terminal access), Young Business Leaders (London, Boston), Careers in Medicine (Canterbury), Model United Nations (Canterbury), IELTS Preparation (Northampton), Ivy League Preparation (Boston).</div>
+      <div class="ptags"><span class="ptag">15–23h specialist/week</span><span class="ptag">Intermediate+ English required</span><span class="ptag">Mostly 2 weeks</span><span class="ptag">Ages 14–17</span></div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-hdr"><span class="picon">⚽</span><span class="pname2">Classic Plus — Sports &amp; Activities</span></div>
+      <div class="pdesc">Classic English programme combined with specialist sports coaching. Available at Oakham (Tennis, Horse Riding, Adventure Activities, Red Stars Football School) and Canterbury (Basketball). Football School features ex-England international Mark Wright coaching, overseen by Michael Owen's programme — strong draw for football-passionate families.</div>
+      <div class="ptags"><span class="ptag">15h English + 9–15h sport/week</span><span class="ptag">Oakham &amp; Canterbury</span><span class="ptag">All abilities</span><span class="ptag">Ages 12–17</span><span class="ptag">1–4 weeks</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- UK LOCATIONS -->
+<div class="section">
+  <div class="rhdr"><span class="rflag">🇬🇧</span><span class="rlabel">UK Locations</span><div class="rdiv"></div></div>
+  <div class="infonote">ℹ️ All UK individual prices <strong>include</strong> £200 registration fee + shared return transfers from London airports or St Pancras. Arrivals strictly 9am–5pm.</div>
+
+  <!-- CSVPA -->
+  <div class="lcard" id="csvpa">
+    <div class="lhdr">
+      <div class="ldot" style="background:var(--cambridge);"></div>
+      <div style="flex:1;"><div class="ltitle">Cambridge — CSVPA</div><div class="lsub">Cambridge School of Visual &amp; Performing Arts · 13–14 Round Church Street, Cambridge, CB5 8AD</div></div>
+      <span class="badge" style="background:var(--cambridge-bg);color:var(--cambridge);">Ages 14–18</span>
+    </div>
+    <div class="lbody">
+      <div class="lmeta">
+        <div class="lmi"><strong>Accommodation</strong>Single en-suite rooms, walking distance from campus</div>
+        <div class="lmi"><strong>Season</strong>28 Jun – 09 Aug 2026</div>
+        <div class="lmi"><strong>Arrival Day</strong>Sunday</div>
+        <div class="lmi"><strong>Meals</strong>Breakfast, lunch &amp; dinner on campus</div>
+        <div class="lmi"><strong>Excursions</strong>1 full-day per week. Saturday excursions compulsory for under 18s.</div>
+        <div class="lmi"><strong>Evening Activities</strong>Compulsory for under 18s (cinema, bowling, ghost tours, quiz nights)</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:14px;">The only arts-specialist summer school in our portfolio. Students access professional-grade studios, high-powered gaming PCs, photography studio, screen printing, sewing machines and industry-experienced tutors. 30 specialist hours per week. Unique positioning for students interested in creative careers or UK art school portfolio preparation. Excursions include V&A, Tate Modern, Natural History Museum.</p>
+      <div class="apills">
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎨 Fashion</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎨 Fashion Communication</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎨 Fashion Styling</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎨 Graphics &amp; Illustration</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎨 Painting &amp; Drawing</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎨 Jewellery Making</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎨 3D Design</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">📸 Photography</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎬 Animation</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎮 Game Design</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">📢 Branding &amp; Advertising</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎬 Film Making</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎭 Acting</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎭 Musical Theatre</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🎵 Music Production</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">📁 Portfolio Prep – Fashion</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">📁 Portfolio Prep – Fine Art</span>
+      </div>
+      <button class="ctrig" onclick="tc(this)">💷 Prices — Cambridge CSVPA <span class="arr">▼</span></button>
+      <div class="cbody">
+        <table class="ctbl">
+          <thead><tr><th>Course</th><th>Duration</th><th>Start Dates 2026</th><th>1 Week</th><th>2 Weeks</th><th>Our Margin</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cn">Fashion</div><div class="cd">Ages 14–18</div></td><td>1–2 wks</td><td style="font-size:11px;">28 Jun · 19 Jul · 02 Aug</td><td class="na">—</td><td class="pc">£3,905</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Fashion Communication</div></td><td>1 wk</td><td style="font-size:11px;">05 Jul · 19 Jul</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Fashion Styling</div></td><td>1 wk</td><td style="font-size:11px;">28 Jun · 19 Jul · 02 Aug</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Graphics &amp; Illustration</div></td><td>1 wk</td><td style="font-size:11px;">28 Jun · 19 Jul · 26 Jul</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Painting &amp; Drawing</div></td><td>1 wk</td><td style="font-size:11px;">05 Jul · 19 Jul · 02 Aug</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Jewellery Making</div></td><td>1 wk</td><td style="font-size:11px;">28 Jun · 19 Jul</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">3D Design</div></td><td>1 wk</td><td style="font-size:11px;">05 Jul · 19 Jul</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Photography</div></td><td>1 wk</td><td style="font-size:11px;">28 Jun · 05 · 12 · 19 · 26 Jul · 02 Aug</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Animation</div></td><td>1 wk</td><td style="font-size:11px;">28 Jun · 05 · 12 · 19 Jul</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Game Design</div></td><td>1 wk</td><td style="font-size:11px;">28 Jun · 05 · 12 · 19 Jul</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Branding &amp; Advertising</div></td><td>1–2 wks</td><td style="font-size:11px;">28 Jun · 12 · 26 Jul</td><td class="pc">£2,050</td><td class="pc">£3,905</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Film Making</div></td><td>1–2 wks</td><td style="font-size:11px;">28 Jun · 12 · 26 Jul · 02 Aug</td><td class="pc">£2,050</td><td class="pc">£3,905</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Acting</div></td><td>1–2 wks</td><td style="font-size:11px;">28 Jun · 12 · 19 Jul · 02 Aug</td><td class="pc">£2,050</td><td class="pc">£3,905</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Musical Theatre</div></td><td>1–2 wks</td><td style="font-size:11px;">28 Jun · 12 · 19 Jul · 02 Aug</td><td class="pc">£2,050</td><td class="pc">£3,905</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Music Production</div></td><td>1 wk</td><td style="font-size:11px;">05 · 12 · 19 Jul</td><td class="pc">£2,050</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Portfolio Prep – Fashion</div><div class="cd">Ages 15–18</div></td><td>2 wks</td><td style="font-size:11px;">28 Jun · 19 Jul · 02 Aug</td><td class="na">—</td><td class="pc">£3,905</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Portfolio Prep – Fine Art</div><div class="cd">Ages 15–18</div></td><td>2 wks</td><td style="font-size:11px;">28 Jun · 19 Jul · 02 Aug</td><td class="na">—</td><td class="pc">£3,905</td><td><span class="pm">TBD</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAMBRIDGE CATS -->
+  <div class="lcard" id="cats">
+    <div class="lhdr">
+      <div class="ldot" style="background:var(--cambridge);"></div>
+      <div style="flex:1;"><div class="ltitle">Cambridge — CATS College</div><div class="lsub">1 High Street, Chesterton, Cambridge, CB4 1NQ</div></div>
+      <span class="badge" style="background:var(--cambridge-bg);color:var(--cambridge);">Ages 14–17</span>
+    </div>
+    <div class="lbody">
+      <div class="lmeta">
+        <div class="lmi"><strong>Accommodation</strong>Two residences, single en-suite rooms, on campus</div>
+        <div class="lmi"><strong>Season</strong>28 Jun – 26 Jul 2026</div>
+        <div class="lmi"><strong>Arrival Day</strong>Sunday</div>
+        <div class="lmi"><strong>Excursions</strong>1 full day + 1 half day/week · London, Canterbury</div>
+        <div class="lmi"><strong>Airport</strong>Stansted 45km · Heathrow 140km</div>
+        <div class="lmi"><strong>Evening Activities</strong>7 per week</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:14px;">Modern, purpose-built campus near the University of Cambridge city centre — walking distance from King's College and the River Cam. STEM course uses Cambridge and London as outdoor classrooms: Science Museum, Olympic Park. Classic course includes punting on the Cam, Cambridge city walking tours and London excursion.</p>
+      <div class="apills">
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🗣 Classic English Course</span>
+        <span class="apill" style="background:var(--cambridge-bg);color:var(--cambridge);">🔬 STEM &amp; English for Science</span>
+      </div>
+      <button class="ctrig" onclick="tc(this)">💷 Prices — Cambridge CATS <span class="arr">▼</span></button>
+      <div class="cbody">
+        <table class="ctbl">
+          <thead><tr><th>Course</th><th>Duration</th><th>Dates</th><th>1 Week</th><th>2 Weeks</th><th>3 Weeks</th><th>Our Margin</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cn">Classic English Course</div><div class="cd">15h English/wk · 1 full + 2 half excursions/wk · All levels</div></td><td>1–6 wks</td><td style="font-size:11px;">28 Jun onward</td><td class="pc">£1,555</td><td class="pc">£3,110</td><td class="pc">£4,665</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">STEM &amp; English for Science</div><div class="cd">15h English + 15h STEM/wk · 1 full + 2 half excursions/wk · Intermediate+</div></td><td>2 wks</td><td style="font-size:11px;">28 Jun · 12 Jul</td><td class="na">—</td><td class="pc">£3,340</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CANTERBURY -->
+  <div class="lcard" id="canterbury">
+    <div class="lhdr">
+      <div class="ldot" style="background:var(--canterbury);"></div>
+      <div style="flex:1;"><div class="ltitle">Canterbury — Stafford House / The Worthgate School</div><div class="lsub">19 New Dover Road, Canterbury, CT1 3AS</div></div>
+      <span class="badge" style="background:var(--canterbury-bg);color:var(--canterbury);">Ages 14–17</span>
+    </div>
+    <div class="lbody">
+      <div class="lmeta">
+        <div class="lmi"><strong>Accommodation</strong>Residential (1–4 beds, private bathrooms) &amp; Homestay (min age 12, max 3 wks for 14–15 yr olds)</div>
+        <div class="lmi"><strong>Season</strong>28 Jun – 23 Aug 2026</div>
+        <div class="lmi"><strong>Arrival Day</strong>Sunday</div>
+        <div class="lmi"><strong>Excursions</strong>1 full day + 1 half day/week · London, Brighton, Cambridge, Leeds &amp; Dover Castle</div>
+        <div class="lmi"><strong>Airport</strong>Gatwick 110km · Stansted 131km · Heathrow 145km</div>
+        <div class="lmi"><strong>City Centre</strong>5-minute walk from school · High-speed train to London: 1 hour</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:14px;">Historic cathedral city — safe, walkable, easy access to London. Longest season of all UK centres (28 Jun–23 Aug). Widest programme variety including unique Careers in Medicine and Model United Nations courses. Homestay available — good for students wanting immersive family experience. Interactive whiteboards, library, self-study room, student lounge.</p>
+      <div class="apills">
+        <span class="apill" style="background:var(--canterbury-bg);color:var(--canterbury);">🗣 Classic English (Residential)</span>
+        <span class="apill" style="background:var(--canterbury-bg);color:var(--canterbury);">🏠 Classic English (Homestay)</span>
+        <span class="apill" style="background:var(--canterbury-bg);color:var(--canterbury);">📚 Intensive English (Residential)</span>
+        <span class="apill" style="background:var(--canterbury-bg);color:var(--canterbury);">🏠 Intensive English (Homestay)</span>
+        <span class="apill" style="background:var(--canterbury-bg);color:var(--canterbury);">🏀 Classic Plus Basketball</span>
+        <span class="apill" style="background:var(--canterbury-bg);color:var(--canterbury);">🩺 Careers in Medicine</span>
+        <span class="apill" style="background:var(--canterbury-bg);color:var(--canterbury);">🌍 Model United Nations</span>
+      </div>
+      <button class="ctrig" onclick="tc(this)">💷 Prices — Canterbury <span class="arr">▼</span></button>
+      <div class="cbody">
+        <table class="ctbl">
+          <thead><tr><th>Course</th><th>Accomm.</th><th>Duration</th><th>1 Week</th><th>2 Weeks</th><th>3 Weeks</th><th>Our Margin</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cn">Classic English Course</div><div class="cd">15h English/wk · 1 full + 1 half excursion/wk · 7 eve activities</div></td><td>Residential</td><td>1–8 wks</td><td class="pc">£1,385</td><td class="pc">£2,770</td><td class="pc">£4,155</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Classic English Course</div><div class="cd">15h English/wk · 5 eve activities</div></td><td>Homestay*</td><td>1–8 wks</td><td class="pc">£1,385</td><td class="pc">£2,770</td><td class="pc">£4,155</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Intensive English</div><div class="cd">23h English/wk · 1 full excursion/wk · 7 eve activities</div></td><td>Residential</td><td>1–8 wks</td><td class="pc">£1,385</td><td class="pc">£2,770</td><td class="pc">£4,155</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Intensive English</div><div class="cd">23h English/wk · 5 eve activities</div></td><td>Homestay*</td><td>1–8 wks</td><td class="pc">£1,385</td><td class="pc">£2,770</td><td class="pc">£4,155</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Classic Plus Basketball</div><div class="cd">15h English + 9h basketball/wk · Dates on request</div></td><td>Residential</td><td>1–2 wks</td><td class="pc">£2,915</td><td class="pc">£5,830</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Careers in Medicine</div><div class="cd">26h specialist/wk · Science Crest Award · B2 English req. · 14 students max</div></td><td>Residential</td><td>2 wks</td><td class="na">—</td><td class="pc">£3,510</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Model United Nations</div><div class="cd">15h specialist + mock UN conference · 2 full + 1 half excursion/wk · B2 English req.</div></td><td>Residential</td><td>3 wks</td><td class="na">—</td><td class="na">—</td><td class="pc">£4,470</td><td><span class="pm">TBD</span></td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:11px;color:var(--text-muted);padding:10px 12px;">* Max homestay stay for ages 14–15 is 3 weeks.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LONDON -->
+  <div class="lcard" id="london">
+    <div class="lhdr">
+      <div class="ldot" style="background:var(--london);"></div>
+      <div style="flex:1;"><div class="ltitle">London — Guildhouse School, Bloomsbury</div><div class="lsub">43–45 Bloomsbury Square, London, WC1A 2RA</div></div>
+      <span class="badge" style="background:var(--london-bg);color:var(--london);">Ages 14–17</span>
+    </div>
+    <div class="lbody">
+      <div class="lmeta">
+        <div class="lmi"><strong>Accommodation</strong>Premier House (en-suite, steps from school) or Hayloft Point at Aldgate (single en-suite, 5 tube stops away)</div>
+        <div class="lmi"><strong>Season</strong>28 Jun – 09 Aug 2026</div>
+        <div class="lmi"><strong>Arrival Day</strong>Sunday (residential) · Monday (Day Programmes)</div>
+        <div class="lmi"><strong>Excursions</strong>1 full day + 5 sightseeing visits/wk built in · London as classroom</div>
+        <div class="lmi"><strong>Airport</strong>London City 14km · Heathrow 30km · Gatwick 47km</div>
+        <div class="lmi"><strong>Transport</strong>Nearest Underground: Holborn. Travel pass included in Explorer courses.</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:14px;">Premium central London location in literary Bloomsbury — walking distance from the British Museum, Oxford Street, Covent Garden. London is the classroom: 5 structured sightseeing visits per week. Bloomberg Business Advantage course provides access to Bloomberg Terminals (normally only available at university level) — standout differentiator for business-oriented families. Day Programmes available for students already based in London (no accommodation needed).</p>
+      <div class="apills">
+        <span class="apill" style="background:var(--london-bg);color:var(--london);">🗺 London Explorer</span>
+        <span class="apill" style="background:var(--london-bg);color:var(--london);">📚 London Academic Explorer</span>
+        <span class="apill" style="background:var(--london-bg);color:var(--london);">💼 Young Business Leaders</span>
+        <span class="apill" style="background:var(--london-bg);color:var(--london);">🔬 STEM &amp; English for Science</span>
+        <span class="apill" style="background:var(--london-bg);color:var(--london);">📈 Bloomberg Business Advantage</span>
+        <span class="apill" style="background:var(--london-bg);color:var(--london);">🗺 London Explorer (Day Programme)</span>
+        <span class="apill" style="background:var(--london-bg);color:var(--london);">📚 London Academic Explorer (Day Programme)</span>
+      </div>
+      <button class="ctrig" onclick="tc(this)">💷 Prices — London Bloomsbury <span class="arr">▼</span></button>
+      <div class="cbody">
+        <table class="ctbl">
+          <thead><tr><th>Course</th><th>Duration</th><th>Start Dates</th><th>1 Week</th><th>2 Weeks</th><th>Our Margin</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cn">London Explorer</div><div class="cd">15h English/wk · 1 full day + 5 sightseeing/wk · Travel pass included</div></td><td>1–2 wks</td><td style="font-size:11px;">28 Jun onward</td><td class="pc">£1,575</td><td class="pc">£3,150</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">London Academic Explorer</div><div class="cd">17.5h specialist/wk · Academic English + London exploration · Travel pass included</div></td><td>1–2 wks</td><td style="font-size:11px;">28 Jun, 05, 12, 19, 26 Jul</td><td class="pc">£1,800</td><td class="pc">£3,600</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Young Business Leaders</div><div class="cd">17.5h specialist/wk · Leadership &amp; entrepreneurship · case studies, pitching · 1 full + 3 half excursions/wk</div></td><td>1–2 wks</td><td style="font-size:11px;">28 Jun · 12 Jul · 26 Jul</td><td class="pc">£1,800</td><td class="pc">£3,600</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">STEM &amp; English for Science</div><div class="cd">9h English + 15h STEM/wk · National Space Centre, Bletchley Park excursions</div></td><td>1–2 wks</td><td style="font-size:11px;">28 Jun · 12 Jul · 26 Jul</td><td class="pc">£1,850</td><td class="pc">£3,700</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Bloomberg Business Advantage</div><div class="cd">17.5h specialist/wk · Bloomberg Market Concepts certification · 11 students max · Unique UK offering</div></td><td>2 wks</td><td style="font-size:11px;">28 Jun · 19 Jul · 02 Aug</td><td class="na">—</td><td class="pc">£3,820</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">London Explorer Day Programme</div><div class="cd">15h English/wk · 1 full + 5 sightseeing/wk · Mon–Sat · No accommodation</div></td><td>1–2 wks</td><td style="font-size:11px;">Mon 29 Jun – 08 Aug</td><td class="pc">£785</td><td class="pc">£1,570</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">London Academic Explorer Day Programme</div><div class="cd">17.5h specialist/wk · Mon–Sat · No accommodation</div></td><td>1–2 wks</td><td style="font-size:11px;">Mon 29 Jun – 08 Aug</td><td class="pc">£900</td><td class="pc">£1,800</td><td><span class="pm">TBD</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- NORTHAMPTON -->
+  <div class="lcard" id="northampton">
+    <div class="lhdr">
+      <div class="ldot" style="background:var(--northampton);"></div>
+      <div style="flex:1;"><div class="ltitle">Northampton — Bosworth Independent School</div><div class="lsub">The Newton Building, St. Georges Avenue, Northampton, NN2 6JB</div></div>
+      <span class="badge" style="background:var(--northampton-bg);color:var(--northampton);">Ages 14–17</span>
+    </div>
+    <div class="lbody">
+      <div class="lmeta">
+        <div class="lmi"><strong>Accommodation</strong>Residential on campus · 6 boarding houses · Single &amp; shared rooms · Shared bathrooms</div>
+        <div class="lmi"><strong>Season</strong>28 Jun – 26 Jul 2026</div>
+        <div class="lmi"><strong>Arrival Day</strong>Sunday</div>
+        <div class="lmi"><strong>Excursions</strong>1 full day + 2 half days/week · London, Cambridge, Oxford, Warwick Castle</div>
+        <div class="lmi"><strong>Airport</strong>Luton 64km · Birmingham 77km</div>
+        <div class="lmi"><strong>Sports</strong>Football, basketball, tennis courts, athletics track (118-acre grounds)</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:14px;">Prestigious independent school founded 1897. Specialist academic-only location — STEM and IELTS only (no Classic course). 22.5 specialist hours per week — highest intensity in the portfolio. Good for students with clear academic goals (university preparation, exam targets). IELTS course also offers opportunity to sit an IELTS test during or after the course (book separately).</p>
+      <div class="apills">
+        <span class="apill" style="background:var(--northampton-bg);color:var(--northampton);">🔬 STEM</span>
+        <span class="apill" style="background:var(--northampton-bg);color:var(--northampton);">📝 IELTS Preparation</span>
+      </div>
+      <button class="ctrig" onclick="tc(this)">💷 Prices — Northampton <span class="arr">▼</span></button>
+      <div class="cbody">
+        <table class="ctbl">
+          <thead><tr><th>Course</th><th>Duration</th><th>Dates</th><th>2 Weeks</th><th>Our Margin</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cn">STEM</div><div class="cd">22.5h specialist/wk · Practical lab-based · National Space Centre, Bletchley Park, Silverstone excursions · Intermediate English req.</div></td><td>2 wks</td><td style="font-size:11px;">28 Jun · 12 Jul</td><td class="pc">£2,320</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">IELTS Preparation</div><div class="cd">22.5h specialist/wk · Test technique &amp; confidence · Pre-Intermediate to Advanced · IELTS test booking available on request</div></td><td>2 wks</td><td style="font-size:11px;">28 Jun · 12 Jul</td><td class="pc">£2,320</td><td><span class="pm">TBD</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- OAKHAM -->
+  <div class="lcard" id="oakham">
+    <div class="lhdr">
+      <div class="ldot" style="background:var(--oakham);"></div>
+      <div style="flex:1;"><div class="ltitle">Oakham — Oakham School</div><div class="lsub">Chapel Close, Market Place, Oakham, LE15 6DT</div></div>
+      <span class="badge" style="background:var(--oakham-bg);color:var(--oakham);">Ages 12–17</span>
+    </div>
+    <div class="lbody">
+      <div class="lmeta">
+        <div class="lmi"><strong>Accommodation</strong>Residential, onsite small boarding houses. Singles, twins &amp; small dorms, shared bathrooms. Each house has own common room &amp; laundry.</div>
+        <div class="lmi"><strong>Season</strong>05 Jul – 02 Aug 2026</div>
+        <div class="lmi"><strong>Arrival Day</strong>Sunday</div>
+        <div class="lmi"><strong>Excursions</strong>1 full day + 2 sightseeing visits/wk · London, Cambridge, Warwick Castle</div>
+        <div class="lmi"><strong>Airport</strong>Birmingham 105km · Stansted 130km · Heathrow 180km</div>
+        <div class="lmi"><strong>Sports Facilities</strong>Indoor swimming pool, sports hall, tennis courts, extensive sports fields</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:14px;">Founded 1584 — most authentic British boarding school experience in the portfolio. Beautiful market town setting. Close to Rutland Water (one of Europe's largest reservoirs) used for adventure activities. <strong>Red Stars Football School</strong>: coached by ex-England international Mark Wright, programme designed by Michael Owen. Students coached in three ability groups; talented players identified for trials. Full kit pack included + full-day London stadium excursion.</p>
+      <div class="apills">
+        <span class="apill" style="background:var(--oakham-bg);color:var(--oakham);">🗣 Classic Course</span>
+        <span class="apill" style="background:var(--oakham-bg);color:var(--oakham);">⚽ Red Stars Football School</span>
+        <span class="apill" style="background:var(--oakham-bg);color:var(--oakham);">🎾 Classic Plus Tennis</span>
+        <span class="apill" style="background:var(--oakham-bg);color:var(--oakham);">🐴 Classic Plus Horse Riding</span>
+        <span class="apill" style="background:var(--oakham-bg);color:var(--oakham);">🏕 Classic Plus Adventure Activities</span>
+      </div>
+      <button class="ctrig" onclick="tc(this)">💷 Prices — Oakham <span class="arr">▼</span></button>
+      <div class="cbody">
+        <table class="ctbl">
+          <thead><tr><th>Course</th><th>Duration</th><th>1 Week</th><th>2 Weeks</th><th>3 Weeks</th><th>Our Margin</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cn">Classic Course</div><div class="cd">15h English/wk · 1 full + 2 sightseeing/wk · 7 eve activities · All levels</div></td><td>1–4 wks</td><td class="pc">£1,420</td><td class="pc">£2,840</td><td class="pc">£4,260</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Red Stars Football School</div><div class="cd">15h English + 15h football/wk · Coached by Mark Wright (ex-Liverpool &amp; England) · 3 ability groups · Kit pack + London stadium excursion included · Ages 12–17</div></td><td>1–2 wks</td><td class="pc">£1,930</td><td class="pc">£3,860</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Classic Plus Tennis</div><div class="cd">15h English + 9h tennis coaching/wk · All abilities · 1 full + 2 half excursions/wk</div></td><td>1–4 wks</td><td class="pc">£1,655</td><td class="pc">£3,310</td><td class="pc">£4,965</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Classic Plus Horse Riding</div><div class="cd">15h English + 9h horse riding/wk · Grooming, stable care + indoor/outdoor riding · 1 full + 2 half excursions/wk</div></td><td>1–4 wks</td><td class="pc">£2,025</td><td class="pc">£4,050</td><td class="pc">£6,075</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Classic Plus Adventure Activities</div><div class="cd">15h English + 9h adventure/wk · Rutland Water: kayaking, watersports, climbing, orienteering · Must swim confidently · 1 full + 2 half excursions/wk</div></td><td>1–4 wks</td><td class="pc">£1,785</td><td class="pc">£3,570</td><td class="pc">£5,355</td><td><span class="pm">TBD</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- USA LOCATIONS -->
+<div class="section">
+  <div class="rhdr"><span class="rflag">🇺🇸</span><span class="rlabel">USA Locations</span><div class="rdiv"></div></div>
+  <div class="infonote">ℹ️ All USA prices <strong>include</strong> $250 registration fee. Boston prices include shared transfers from Boston Logan International Airport only.</div>
+
+  <!-- BOSTON -->
+  <div class="lcard" id="boston">
+    <div class="lhdr">
+      <div class="ldot" style="background:var(--boston);"></div>
+      <div style="flex:1;"><div class="ltitle">Boston — CATS Academy Boston</div><div class="lsub">2001 Washington Street, Braintree, MA 02184, United States</div></div>
+      <span class="badge" style="background:var(--boston-bg);color:var(--boston);">Ages 14–17</span>
+    </div>
+    <div class="lbody">
+      <div class="lmeta">
+        <div class="lmi"><strong>Accommodation</strong>Residential on campus · Modern single en-suite rooms · 5 residences, 449 rooms · Air-conditioned</div>
+        <div class="lmi"><strong>Season</strong>28 Jun – 02 Aug 2026</div>
+        <div class="lmi"><strong>Arrival Day</strong>Sunday</div>
+        <div class="lmi"><strong>Transfers</strong>Boston Logan International (30km) — included in price</div>
+        <div class="lmi"><strong>Excursions</strong>1 full day + 4 half-day visits/wk · Harvard, MIT, Freedom Trail, NYC (full day), Aquarium, Newport RI</div>
+        <div class="lmi"><strong>Campus</strong>20+ acres · 43 classrooms · CATS Innovation Lab · $1M+ campus security</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:14px;">Most diverse USA programme offering. 10 miles from downtown Boston and the beach. Genuine American boarding school experience at prestigious CATS Academy. Full-day New York City excursion included. Arts courses (Photography, Film, Comics) have very small class sizes (9 students max). Basketball course uniquely blends high-level coaching with intercultural exchange.</p>
+      <div class="apills">
+        <span class="apill" style="background:var(--boston-bg);color:var(--boston);">🗣 Classic Course</span>
+        <span class="apill" style="background:var(--boston-bg);color:var(--boston);">🔬 STEM Course</span>
+        <span class="apill" style="background:var(--boston-bg);color:var(--boston);">💼 Young Business Leaders</span>
+        <span class="apill" style="background:var(--boston-bg);color:var(--boston);">🎓 Ivy League Preparation</span>
+        <span class="apill" style="background:var(--boston-bg);color:var(--boston);">📸 Creative Arts: Photography</span>
+        <span class="apill" style="background:var(--boston-bg);color:var(--boston);">🎬 Creative Arts: Film Making</span>
+        <span class="apill" style="background:var(--boston-bg);color:var(--boston);">🖼 Creative Arts: Illustration &amp; Comics</span>
+        <span class="apill" style="background:var(--boston-bg);color:var(--boston);">🏀 Basketball: Skills, Strategy &amp; Global Teamwork</span>
+      </div>
+      <button class="ctrig" onclick="tc(this)">💵 Prices — Boston (USD) <span class="arr">▼</span></button>
+      <div class="cbody">
+        <table class="ctbl">
+          <thead><tr><th>Course</th><th>Type</th><th>Duration</th><th>Start Dates</th><th>1 Week</th><th>2 Weeks</th><th>Our Margin</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cn">Classic Course</div><div class="cd">15h English/wk · 1 full + 4 half excursions/wk · Ages 12–17</div></td><td><span style="font-size:11px;background:#e0f7fa;color:#0e7490;padding:2px 6px;border-radius:4px;">Language</span></td><td>1–4 wks</td><td style="font-size:11px;">28 Jun onward</td><td class="pc">$2,075</td><td class="pc">$4,150</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">STEM Course</div><div class="cd">18h specialist/wk · CATS Innovation Lab (robots, wearables) · Harvard, Boston Aquarium, MIT excursions</div></td><td><span style="font-size:11px;background:#e0f7fa;color:#0e7490;padding:2px 6px;border-radius:4px;">Academic</span></td><td>1–4 wks</td><td style="font-size:11px;">28 Jun onward</td><td class="pc">$2,745</td><td class="pc">$5,490</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Young Business Leaders</div><div class="cd">18h specialist/wk · Product design, company creation, investor pitching</div></td><td><span style="font-size:11px;background:#e0f7fa;color:#0e7490;padding:2px 6px;border-radius:4px;">Academic</span></td><td>2 wks</td><td style="font-size:11px;">28 Jun · 19 Jul</td><td class="na">—</td><td class="pc">$4,460</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Ivy League Preparation</div><div class="cd">18h specialist/wk · TOEFL/SAT strategies · Resume &amp; essay writing · Harvard &amp; MIT educational visits</div></td><td><span style="font-size:11px;background:#e0f7fa;color:#0e7490;padding:2px 6px;border-radius:4px;">Academic</span></td><td>2 wks</td><td style="font-size:11px;">05 Jul</td><td class="na">—</td><td class="pc">$4,560</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Creative Arts: Photography</div><div class="cd">18h specialist/wk · 9 students max · Boston as creative backdrop · Digital editing</div></td><td><span style="font-size:11px;background:#fce7f3;color:#be185d;padding:2px 6px;border-radius:4px;">Arts</span></td><td>1 wk</td><td style="font-size:11px;">28 Jun · 05 Jul</td><td class="pc">$2,345</td><td class="na">—</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Creative Arts: Film Making</div><div class="cd">18h specialist/wk · 9 students max · Cinematography, narrative, editing</div></td><td><span style="font-size:11px;background:#fce7f3;color:#be185d;padding:2px 6px;border-radius:4px;">Arts</span></td><td>2 wks</td><td style="font-size:11px;">05 Jul</td><td class="na">—</td><td class="pc">$4,690</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Creative Arts: Illustration &amp; Comics</div><div class="cd">18h specialist/wk · 16 students max · Traditional tools + visual storytelling</div></td><td><span style="font-size:11px;background:#fce7f3;color:#be185d;padding:2px 6px;border-radius:4px;">Arts</span></td><td>2 wks</td><td style="font-size:11px;">12 Jul</td><td class="na">—</td><td class="pc">$4,690</td><td><span class="pm">TBD</span></td></tr>
+            <tr><td><div class="cn">Basketball: Skills, Strategy &amp; Global Teamwork</div><div class="cd">15h practice + 3h sports science/wk · 40 students max · Intermediate–Advanced level</div></td><td><span style="font-size:11px;background:#e8f5ee;color:#1a6640;padding:2px 6px;border-radius:4px;">Sports</span></td><td>1–4 wks</td><td style="font-size:11px;">28 Jun onward</td><td class="pc">$2,745</td><td class="pc">$5,490</td><td><span class="pm">TBD</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW YORK -->
+  <div class="lcard" id="newyork">
+    <div class="lhdr">
+      <div class="ldot" style="background:var(--newyork);"></div>
+      <div style="flex:1;"><div class="ltitle">New York — Columbia University (Barnard College)</div><div class="lsub">116th and Broadway, NY 10027, United States</div></div>
+      <span class="badge" style="background:var(--newyork-bg);color:var(--newyork);">Ages 13–17</span>
+    </div>
+    <div class="lbody">
+      <div class="lmeta">
+        <div class="lmi"><strong>Accommodation</strong>Traditional college dorms · 2 students/room · Shared bathroom · WiFi + laundry included</div>
+        <div class="lmi"><strong>Season</strong>28 Jun – 08 Aug 2026</div>
+        <div class="lmi"><strong>Schedule</strong>Sunday start · Saturday finish</div>
+        <div class="lmi"><strong>Excursions</strong>1 full + 5 half-day/week · Coney Island, Statue of Liberty, Brooklyn, Times Square, MoMA, Wall Street</div>
+        <div class="lmi"><strong>Airport</strong>JFK 28km · Newark 35km · LaGuardia 35km</div>
+        <div class="lmi"><strong>Evening Activities</strong>5 per week</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:14px;">Live on the campus of Barnard College, Columbia University — one of the world's most prestigious universities, in the heart of Manhattan. Students explore NYC through 5 built-in sightseeing visits per week covering Central Park, Times Square, Brooklyn Bridge, SOHO, Wall Street, MoMA and more. High-premium positioning for price-insensitive families. Very limited individual places.</p>
+      <div class="apills">
+        <span class="apill" style="background:var(--newyork-bg);color:var(--newyork);">🗣 Classic Course</span>
+      </div>
+      <button class="ctrig" onclick="tc(this)">💵 Prices — New York (USD) <span class="arr">▼</span></button>
+      <div class="cbody">
+        <table class="ctbl">
+          <thead><tr><th>Course</th><th>Duration</th><th>1 Week</th><th>2 Weeks</th><th>3 Weeks</th><th>Our Margin</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cn">Classic Course</div><div class="cd">17.5h English/wk · 1 full + 5 half excursions/wk · Manhattan campus · 5 eve activities/wk</div></td><td>1–2 wks</td><td class="pc">$2,470</td><td class="pc">$4,940</td><td class="pc">$7,410</td><td><span class="pm">TBD</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAN FRANCISCO -->
+  <div class="lcard" id="sf">
+    <div class="lhdr">
+      <div class="ldot" style="background:var(--sf);"></div>
+      <div style="flex:1;"><div class="ltitle">San Francisco — UC Berkeley</div><div class="lsub">University Avenue &amp; Oxford St, Berkeley, CA 94720, United States</div></div>
+      <span class="badge" style="background:var(--sf-bg);color:var(--sf);">Ages 13–17</span>
+    </div>
+    <div class="lbody">
+      <div class="lmeta">
+        <div class="lmi"><strong>Accommodation</strong>UC Berkeley campus dorms · Twin &amp; triple rooms · Shared bathrooms · Capacity: 75 students total</div>
+        <div class="lmi"><strong>Season</strong>28 Jun – 09 Aug 2026</div>
+        <div class="lmi"><strong>Airport</strong>San Francisco International 42km (35 mins)</div>
+        <div class="lmi"><strong>Excursions</strong>1 full + 5 half-day/week · Alcatraz, Golden Gate, Silicon Valley, Santa Cruz Beach, Exploratorium</div>
+        <div class="lmi"><strong>Transport</strong>Downtown Berkeley BART station (10 min walk)</div>
+        <div class="lmi"><strong>Note</strong>Very small capacity — 75 students max. Book early.</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:14px;">Live and study at UC Berkeley, ranked among the world's top universities. Campus in the artistic town of Berkeley with stunning San Francisco Bay views. Silicon Valley tour and Alcatraz among the signature excursions. Most intimate programme in the portfolio — just 75 students total. Premium positioning for tech/innovation-oriented families. BART metro runs directly to San Francisco.</p>
+      <div class="apills">
+        <span class="apill" style="background:var(--sf-bg);color:var(--sf);">🗣 Classic Course</span>
+      </div>
+      <button class="ctrig" onclick="tc(this)">💵 Prices — San Francisco (USD) <span class="arr">▼</span></button>
+      <div class="cbody">
+        <table class="ctbl">
+          <thead><tr><th>Course</th><th>Duration</th><th>1 Week</th><th>2 Weeks</th><th>3 Weeks</th><th>Our Margin</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cn">Classic Course</div><div class="cd">15h English/wk · 1 full + 5 half excursions/wk · 75 students total capacity</div></td><td>1–2 wks</td><td class="pc">$2,840</td><td class="pc">$5,680</td><td class="pc">$8,520</td><td><span class="pm">TBD</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADDITIONAL FEES -->
+<div class="section" id="fees">
+  <div class="section-title">Additional Fees</div>
+  <div class="fgrid">
+    <div class="fcard">
+      <div class="ftitle">🇬🇧 UK — Individual Supplements</div>
+      <div class="frow"><span>Unaccompanied Minor Transfer (each way)</span><span class="famt">£200</span></div>
+      <div class="frow"><span>Travel Insurance</span><span class="famt">£9</span></div>
+      <div class="frow"><span>Bank Transfer Fee</span><span class="famt">£12</span></div>
+      <div class="frow"><span>Damage Deposit (payable at centre)</span><span class="famt">£30</span></div>
+    </div>
+    <div class="fcard">
+      <div class="ftitle">🇺🇸 USA — Individual Supplements</div>
+      <div class="frow"><span>Unaccompanied Minor Transfer (each way)</span><span class="famt">$250</span></div>
+      <div class="frow"><span>Bank Transfer Fee</span><span class="famt">$30</span></div>
+      <div class="frow"><span>Damage Deposit (payable at centre)</span><span class="famt">$50</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT'S INCLUDED -->
+<div class="section" id="inclusions">
+  <div class="section-title">What's Included</div>
+  <div class="igrid">
+    <div class="ibox">
+      <div class="ibox-t">✅ Included in price</div>
+      <ul>
+        <li>Registration fee: £200 (UK) / $250 (USA)</li>
+        <li>Shared return transfers from London airports / St Pancras (UK) or Boston Logan (Boston only)</li>
+        <li>Accommodation (residential or homestay per course)</li>
+        <li>3 meals per day</li>
+        <li>All tuition &amp; specialist classes</li>
+        <li>Full &amp; half-day excursions (per course)</li>
+        <li>Evening activities programme</li>
+        <li>End-of-course certificate &amp; student portfolio</li>
+        <li>24/7 supervision &amp; Student Welfare Officers</li>
+        <li>Onsite nurse 3 days/week (UK residential centres)</li>
+        <li>Designated Safeguarding Lead at each centre</li>
+      </ul>
+    </div>
+    <div class="ibox">
+      <div class="ibox-t">❌ Not included</div>
+      <ul>
+        <li>Flights to UK/USA</li>
+        <li>Travel &amp; medical insurance (student's responsibility)</li>
+        <li>Unaccompanied minor transfer supplement</li>
+        <li>Transfers from non-London airports / non-standard times</li>
+        <li>Optional excursions</li>
+        <li>Pocket money</li>
+        <li>Damage deposit (£30 UK / $50 USA — paid at centre)</li>
+        <li>Bank transfer fee (£12 UK / $30 USA)</li>
+        <li>Travel insurance (£9 UK)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- INTERNAL NOTES -->
+<div class="section" id="notes">
+  <div class="section-title">Internal Notes</div>
+  <div class="inote">
+    <div class="inote-icon">🔒</div>
+    <div>
+      <div class="inote-label">Partnership</div>
+      <p>Stafford House is part of <strong>CATS Global Schools</strong>. We have a co-branded <strong>EDVISION × Stafford House brochure for 2026</strong> — use for client presentations. Contact: <strong>reservations@staffordhouse.com</strong> · T: +44 (0)1227 787730.</p>
+    </div>
+  </div>
+  <div class="inote" style="margin-top:8px;">
+    <div class="inote-icon">📋</div>
+    <div>
+      <div class="inote-label">Booking Notes</div>
+      <p>Individual bookings only (this file). Arrivals strictly 9am–5pm from London airports or St Pancras — outside these times/locations incurs extra transfer charges. Dietary requirements (halal, vegetarian, coeliac) must be declared <strong>at least 2 months before arrival</strong>. Margin model TBD — confirm with Partner 2.</p>
+    </div>
+  </div>
+  <div class="inote" style="margin-top:8px;">
+    <div class="inote-icon">🌍</div>
+    <div>
+      <div class="inote-label">Market Fit by Location</div>
+      <p><strong>CSVPA Cambridge</strong> — creative families, UK art school applicants. <strong>Canterbury</strong> — classic English study, widest choice, good entry-level, longest season. <strong>London Bloomsbury</strong> — premium urban, Bloomberg Advantage unique for business-oriented. <strong>Oakham</strong> — boarding school + Football School for Russia/CIS/Middle East football families. <strong>Northampton</strong> — focused academic (IELTS/STEM) only. <strong>Boston</strong> — most diverse USA offer. <strong>New York Columbia</strong> — prestige Manhattan, high-end positioning. <strong>San Francisco Berkeley</strong> — intimate, tech/innovation-oriented, book early.</p>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+</div>
+<script>
+function tc(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+</script>
+</body>
+</html>

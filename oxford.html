@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oxford International — EDVISION Partner Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --navy-mid: #1a3560;
+    --blue: #1e5fbe;
+    --blue-light: #3478d8;
+    --accent: #e8a020;
+    --accent-light: #f5c355;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+    --text: #0d1f3c;
+    --text-mid: #3a4d6b;
+    --text-muted: #7a8fa8;
+    --border: #dde4ef;
+    --bg-section: #f2f5fb;
+    --internal: #fff8ed;
+    --internal-border: #f5c355;
+    --internal-text: #7a4d00;
+    --margin-bg: #e8f5ee;
+    --margin-text: #1a6640;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── Top bar ── */
+  
+
+  /* ── Layout ── */
+  .layout {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: var(--navy);
+    padding: 32px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar-section-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5a7aaa;
+    padding: 0 24px 8px;
+    margin-top: 24px;
+  }
+  .sidebar-section-label:first-child { margin-top: 0; }
+  .sidebar a {
+    display: block;
+    padding: 9px 24px;
+    font-size: 13px;
+    color: #a8bcd8;
+    text-decoration: none;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .sidebar a:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+  .sidebar a.active { color: var(--white); border-left-color: var(--accent); background: rgba(255,255,255,0.07); }
+
+  /* ── Main content ── */
+  .main {
+    flex: 1;
+    padding: 40px 48px 80px;
+    max-width: 900px;
+  }
+
+  /* ── Provider header ── */
+  .provider-header {
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .provider-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .provider-name {
+    font-family: var(--font-display);
+    font-size: 34px;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .provider-url {
+    font-size: 13px;
+    color: var(--blue);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+  .provider-url:hover { text-decoration: underline; }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-weight: 400;
+  }
+  .tag-blue { background: #dceaf9; color: #0d4a99; }
+  .tag-teal { background: #d6f0e6; color: #0a5c38; }
+  .tag-amber { background: #fdf0d5; color: #7a4d00; }
+  .tag-gray { background: #e8edf5; color: #3a4d6b; }
+
+  /* ── Meta strip ── */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .meta-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .meta-card .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .meta-card .value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--navy);
+  }
+
+  /* ── Section heading ── */
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  /* ── Location tabs ── */
+  .loc-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .loc-tab {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text-mid);
+    transition: all 0.15s;
+  }
+  .loc-tab.active {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+  .loc-tab:hover:not(.active) { border-color: var(--navy-mid); color: var(--navy); }
+
+  .loc-content { display: none; }
+  .loc-content.active { display: block; }
+
+  /* ── Price table ── */
+  .price-table-wrap { overflow-x: auto; margin-bottom: 24px; }
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 640px;
+  }
+  .price-table th {
+    background: var(--navy);
+    color: rgba(255,255,255,0.75);
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .price-table th:first-child { border-radius: 8px 0 0 0; }
+  .price-table th:last-child { border-radius: 0 8px 0 0; }
+  .price-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table tr:nth-child(even) td { background: var(--bg-section); }
+  .price-table .course-name { font-weight: 500; color: var(--navy); }
+  .price-table .course-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .price-num { font-weight: 500; white-space: nowrap; color: var(--navy); }
+  .margin-cell {
+    background: var(--margin-bg) !important;
+    color: var(--margin-text);
+    font-weight: 500;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .margin-placeholder {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ── Sub-section ── */
+  .sub-section { margin-bottom: 28px; }
+  .sub-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sub-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Small table ── */
+  .small-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .small-table th {
+    background: var(--bg-section);
+    color: var(--text-mid);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 9px 14px;
+    text-align: left;
+  }
+  .small-table td {
+    padding: 9px 14px;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+  }
+  .small-table tr:first-child td { border-top: none; }
+
+  /* ── Fees grid ── */
+  .fees-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .fee-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+  .fee-label { color: var(--text-mid); }
+  .fee-value { font-weight: 500; color: var(--navy); }
+
+  /* ── Transfer table ── */
+  .transfer-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .transfer-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .transfer-item .t-name { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+  .transfer-item .t-price { font-size: 14px; font-weight: 500; color: var(--navy); }
+
+  /* ── Notes ── */
+  .notes-box {
+    background: var(--internal);
+    border: 1px solid var(--internal-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--internal-text);
+    line-height: 1.7;
+  }
+  .notes-box .notes-header {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .notes-row { margin-bottom: 4px; }
+  .notes-row strong { font-weight: 500; }
+
+  /* ── Disclaimer ── */
+  .disclaimer {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 14px;
+    line-height: 1.6;
+    padding: 10px 14px;
+    background: var(--bg-section);
+    border-radius: 8px;
+    border-left: 3px solid var(--border);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 20px 60px; }
+    .meta-strip { grid-template-columns: 1fr 1fr; }
+    .fees-grid { grid-template-columns: 1fr; }
+    .transfer-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-section-label">On this page</div>
+    <a href="#overview">Overview</a>
+    <a href="#courses">Courses & Prices</a>
+    <a href="#accommodation">Accommodation</a>
+    <a href="#fees">Additional Fees</a>
+    <a href="#transfers">Transfers</a>
+    <a href="#dates">Key Dates</a>
+    <a href="#notes">Internal Notes</a>
+  </nav>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Header -->
+    <div class="provider-header" id="overview">
+      <div class="provider-eyebrow">Language Schools · Provider Profile</div>
+      <h1 class="provider-name">Oxford International</h1>
+      <a class="provider-url" href="https://www.oxfordinternational.com" target="_blank">
+        oxfordinternational.com ↗
+      </a>
+      <div class="tags">
+        <span class="tag tag-blue">English Language</span>
+        <span class="tag tag-blue">IELTS Preparation</span>
+        <span class="tag tag-teal">All Ages</span>
+        <span class="tag tag-gray">Year-round</span>
+        <span class="tag tag-amber">Margin model</span>
+      </div>
+    </div>
+
+    <!-- Meta strip -->
+    <div class="meta-strip">
+      <div class="meta-card">
+        <div class="label">Business model</div>
+        <div class="value">Margin on top</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Availability</div>
+        <div class="value">Year-round</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Age</div>
+        <div class="value">All ages</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">UK Locations</div>
+        <div class="value">London · Oxford</div>
+      </div>
+    </div>
+
+    <!-- Courses & Prices -->
+    <div class="section" id="courses">
+      <div class="section-title">Courses & Prices — Price per Week (GBP)</div>
+
+      <!-- Location tabs -->
+      <div class="loc-tabs">
+        <button class="loc-tab active" onclick="switchLoc('london', this)">London (Greenwich)</button>
+        <button class="loc-tab" onclick="switchLoc('oxford', this)">Oxford</button>
+      </div>
+
+      <!-- London -->
+      <div class="loc-content active" id="loc-london">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Lessons/wk</th>
+                <th>1–3 wks</th>
+                <th>4–7 wks</th>
+                <th>8–11 wks</th>
+                <th>12–23 wks</th>
+                <th>24+ wks</th>
+                <th style="background:#1a3560">Our margin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="course-name">Morning 20</div>
+                  <div class="course-desc">20×45min General English</div>
+                </td>
+                <td>20</td>
+                <td class="price-num">£633</td>
+                <td class="price-num">£601</td>
+                <td class="price-num">£566</td>
+                <td class="price-num">£548</td>
+                <td class="price-num">£530</td>
+                <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="course-name">Intensive 30</div>
+                  <div class="course-desc">20×45min General + 10×45min Elective</div>
+                </td>
+                <td>30</td>
+                <td class="price-num">£742</td>
+                <td class="price-num">£697</td>
+                <td class="price-num">£643</td>
+                <td class="price-num">£623</td>
+                <td class="price-num">£592</td>
+                <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="course-name">Super Intensive 40 *</div>
+                  <div class="course-desc">20×45min General + 20×45min Elective · min. B2</div>
+                </td>
+                <td>40</td>
+                <td class="price-num">£821</td>
+                <td class="price-num">£775</td>
+                <td class="price-num">£728</td>
+                <td class="price-num">£720</td>
+                <td class="price-num">£689</td>
+                <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="course-name">IELTS 20</div>
+                  <div class="course-desc">20×45min IELTS Exam Preparation</div>
+                </td>
+                <td>20</td>
+                <td class="price-num">£633</td>
+                <td class="price-num">£601</td>
+                <td class="price-num">£566</td>
+                <td class="price-num">£548</td>
+                <td class="price-num">£530</td>
+                <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="disclaimer">* Super Intensive 40 subject to availability. Prices may be adjusted at any time without notice.</div>
+      </div>
+
+      <!-- Oxford -->
+      <div class="loc-content" id="loc-oxford">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Lessons/wk</th>
+                <th>1–3 wks</th>
+                <th>4–7 wks</th>
+                <th>8–11 wks</th>
+                <th>12–23 wks</th>
+                <th>24+ wks</th>
+                <th style="background:#1a3560">Our margin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="course-name">Morning 20</div>
+                  <div class="course-desc">20×45min General English</div>
+                </td>
+                <td>20</td>
+                <td class="price-num">£599</td>
+                <td class="price-num">£569</td>
+                <td class="price-num">£536</td>
+                <td class="price-num">£511</td>
+                <td class="price-num">£503</td>
+                <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="course-name">Intensive 30</div>
+                  <div class="course-desc">20×45min General + 10×45min Elective</div>
+                </td>
+                <td>30</td>
+                <td class="price-num">£704</td>
+                <td class="price-num">£655</td>
+                <td class="price-num">£613</td>
+                <td class="price-num">£574</td>
+                <td class="price-num">£561</td>
+                <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="course-name">Super Intensive 40 *</div>
+                  <div class="course-desc">20×45min General + 20×45min Elective · min. B2</div>
+                </td>
+                <td>40</td>
+                <td class="price-num">£789</td>
+                <td class="price-num">£738</td>
+                <td class="price-num">£689</td>
+                <td class="price-num">£662</td>
+                <td class="price-num">£643</td>
+                <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="course-name">IELTS 20</div>
+                  <div class="course-desc">20×45min IELTS Exam Preparation</div>
+                </td>
+                <td>20</td>
+                <td class="price-num">£599</td>
+                <td class="price-num">£569</td>
+                <td class="price-num">£536</td>
+                <td class="price-num">£511</td>
+                <td class="price-num">£503</td>
+                <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="disclaimer">* Super Intensive 40 subject to availability. Prices may be adjusted at any time without notice.</div>
+      </div>
+
+      <!-- 1:1 Private -->
+      <div class="sub-section" style="margin-top:24px">
+        <div class="sub-title">1:1 Private Lessons</div>
+        <table class="small-table" style="max-width:340px">
+          <thead><tr><th>Hours booked</th><th>Fee per hour</th></tr></thead>
+          <tbody>
+            <tr><td>1–4 hours</td><td class="price-num">£65</td></tr>
+            <tr><td>5–9 hours</td><td class="price-num">£60</td></tr>
+            <tr><td>10+ hours</td><td class="price-num">£55</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Accommodation -->
+    <div class="section" id="accommodation">
+      <div class="section-title">Accommodation — Price per Week (GBP)</div>
+
+      <div class="loc-tabs">
+        <button class="loc-tab active" onclick="switchAccom('london-acc', this)">London (Greenwich)</button>
+        <button class="loc-tab" onclick="switchAccom('oxford-acc', this)">Oxford</button>
+      </div>
+
+      <!-- London accommodation -->
+      <div class="loc-content active" id="loc-london-acc">
+        <div class="sub-section">
+          <div class="sub-title">Homestay</div>
+          <table class="small-table">
+            <thead><tr><th>Type</th><th>Room</th><th>Price/week</th></tr></thead>
+            <tbody>
+              <tr><td>Self-Catering</td><td>Single, shared facilities</td><td class="price-num">£290</td></tr>
+              <tr><td rowspan="2">B&B</td><td>Single, shared facilities</td><td class="price-num">£300</td></tr>
+              <tr><td>Twin, shared facilities</td><td class="price-num">£285</td></tr>
+              <tr><td rowspan="2">Half-Board</td><td>Single, shared facilities</td><td class="price-num">£325</td></tr>
+              <tr><td>Twin, shared facilities</td><td class="price-num">£310</td></tr>
+            </tbody>
+          </table>
+          <div class="disclaimer">Peak season supplement (Jul–Aug & 21 Dec–1 Jan): +£35/week. All under-18s must book minimum half-board. Available Sun–Sun.</div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">Student Residence</div>
+          <table class="small-table" style="max-width:420px">
+            <thead><tr><th>Residence</th><th>Room type</th><th>Price/week</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="2">VITA Student Residence</td><td>Single ensuite</td><td class="price-num">£410</td></tr>
+              <tr><td>Single studio</td><td class="price-num">£470</td></tr>
+            </tbody>
+          </table>
+          <div class="disclaimer">£100 deposit on arrival (refundable). Accommodation placement fee: £70/booking. Students must be 18+. Available Sun–Sat.</div>
+        </div>
+      </div>
+
+      <!-- Oxford accommodation -->
+      <div class="loc-content" id="loc-oxford-acc">
+        <div class="sub-section">
+          <div class="sub-title">Homestay</div>
+          <table class="small-table">
+            <thead><tr><th>Type</th><th>Room</th><th>Price/week</th></tr></thead>
+            <tbody>
+              <tr><td>Self-Catering</td><td>Single, shared facilities</td><td class="price-num">£285</td></tr>
+              <tr><td rowspan="2">B&B</td><td>Single, shared facilities</td><td class="price-num">£295</td></tr>
+              <tr><td>Twin, shared facilities</td><td class="price-num">£280</td></tr>
+              <tr><td rowspan="2">Half-Board</td><td>Single, shared facilities</td><td class="price-num">£320</td></tr>
+              <tr><td>Twin, shared facilities</td><td class="price-num">£305</td></tr>
+            </tbody>
+          </table>
+          <div class="disclaimer">Peak season supplement (Jul–Aug & 21 Dec–1 Jan): +£35/week. All under-18s must book minimum half-board. Available Sun–Sun.</div>
+        </div>
+        <div class="sub-section">
+          <div class="sub-title">Student Residence</div>
+          <table class="small-table" style="max-width:420px">
+            <thead><tr><th>Residence</th><th>Room type</th><th>Price/week</th></tr></thead>
+            <tbody>
+              <tr><td>Student Castle Residence</td><td>Single ensuite</td><td class="price-num">£370</td></tr>
+              <tr><td>The Mews</td><td>Single, private bathroom</td><td class="price-num">£340</td></tr>
+            </tbody>
+          </table>
+          <div class="disclaimer">£100 deposit on arrival (refundable). Accommodation placement fee: £60/booking. Students must be 18+. Student Castle: Sun–Sat. The Mews: Sun–Sun.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Fees -->
+    <div class="section" id="fees">
+      <div class="section-title">Additional Fees</div>
+      <div class="fees-grid">
+        <div class="fee-item"><span class="fee-label">Enrolment fee</span><span class="fee-value">£80</span></div>
+        <div class="fee-item"><span class="fee-label">Course materials</span><span class="fee-value">£80</span></div>
+      </div>
+      <div class="disclaimer" style="margin-top:10px">Course materials may need to be re-purchased when changing levels and/or every 12 weeks.</div>
+    </div>
+
+    <!-- Transfers -->
+    <div class="section" id="transfers">
+      <div class="section-title">Airport / Train Transfers — One-Way (up to 3 pax per taxi)</div>
+
+      <div class="sub-section">
+        <div class="sub-title">London (Greenwich)</div>
+        <div class="transfer-grid">
+          <div class="transfer-item"><div class="t-name">Heathrow</div><div class="t-price">£190</div></div>
+          <div class="transfer-item"><div class="t-name">Gatwick</div><div class="t-price">£190</div></div>
+          <div class="transfer-item"><div class="t-name">Luton</div><div class="t-price">£212</div></div>
+          <div class="transfer-item"><div class="t-name">Stansted</div><div class="t-price">£212</div></div>
+          <div class="transfer-item"><div class="t-name">London City</div><div class="t-price">£152</div></div>
+          <div class="transfer-item"><div class="t-name">St Pancras</div><div class="t-price">£152</div></div>
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">Oxford</div>
+        <div class="transfer-grid">
+          <div class="transfer-item"><div class="t-name">Heathrow</div><div class="t-price">£200</div></div>
+          <div class="transfer-item"><div class="t-name">Gatwick</div><div class="t-price">£280</div></div>
+          <div class="transfer-item"><div class="t-name">Luton</div><div class="t-price">£240</div></div>
+          <div class="transfer-item"><div class="t-name">Stansted</div><div class="t-price">£305</div></div>
+          <div class="transfer-item"><div class="t-name">London City</div><div class="t-price">£305</div></div>
+          <div class="transfer-item"><div class="t-name">St Pancras</div><div class="t-price">£305</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Dates -->
+    <div class="section" id="dates">
+      <div class="section-title">Key Dates 2026</div>
+      <div class="notes-box" style="background:#f2f5fb; border-color: var(--border); color: var(--text-mid);">
+        <div style="margin-bottom:8px; font-size:13px;">Programme start dates: <strong>every Monday year-round</strong> (see calendar in PDF for public holidays and school closures).</div>
+        <div style="font-size:13px;">Oxford International does <strong>not</strong> replace missed classes due to school closures or public holidays.</div>
+      </div>
+    </div>
+
+    <!-- Internal Notes -->
+    <div class="section" id="notes">
+      <div class="section-title">Internal Notes</div>
+      <div class="notes-box">
+        
+        <div class="notes-row"><strong>Business model:</strong> We add our margin on top of the provider's listed price. Net cost = listed price; client pays listed price + our margin.</div>
+        <div class="notes-row"><strong>Margin:</strong> To be defined — update this field once agreed.</div>
+        <div class="notes-row"><strong>Contact:</strong> — to add</div>
+        <div class="notes-row"><strong>Notes:</strong> Prices may change without notice. Always verify current rates before quoting clients.</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function switchLoc(id, btn) {
+    const parent = btn.closest('.section') || btn.parentElement.parentElement;
+    btn.parentElement.querySelectorAll('.loc-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const prefix = id.startsWith('london') && !id.includes('acc') ? 'loc-london' : id.startsWith('oxford') && !id.includes('acc') ? 'loc-oxford' : null;
+    if (prefix) {
+      document.getElementById('loc-london').classList.remove('active');
+      document.getElementById('loc-oxford').classList.remove('active');
+      document.getElementById(prefix).classList.add('active');
+    }
+  }
+  function switchAccom(id, btn) {
+    btn.parentElement.querySelectorAll('.loc-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('loc-london-acc').classList.remove('active');
+    document.getElementById('loc-oxford-acc').classList.remove('active');
+    document.getElementById('loc-' + id).classList.add('active');
+  }
+</script>
+</body>
+</html>

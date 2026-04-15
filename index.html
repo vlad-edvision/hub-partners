@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDVISION — Partner Directory</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --accent: #e8a020;
+    --accent-light: #f5c355;
+    --blue: #1e5fbe;
+    --white: #fff;
+    --cream: #f8f5f0;
+    --text: #0d1f3c;
+    --text-muted: #7a8fa8;
+    --border: #dde4ef;
+    --bg-section: #f2f5fb;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; font-family: var(--font-body); background: var(--cream); color: var(--text); }
+  body { display: flex; flex-direction: column; }
+
+  /* Topbar */
+  .topbar { background: var(--navy); height: 50px; display: flex; align-items: stretch; padding: 0 24px; flex-shrink: 0; z-index: 100; }
+  .topbar-brand { font-family: var(--font-display); color: var(--white); font-size: 16px; letter-spacing: .04em; display: flex; align-items: center; padding-right: 24px; border-right: 1px solid rgba(255,255,255,.1); margin-right: 8px; white-space: nowrap; }
+  .topbar-brand span { color: var(--accent-light); }
+  .ptabs { display: flex; align-items: stretch; flex: 1; overflow-x: auto; scrollbar-width: none; }
+  .ptabs::-webkit-scrollbar { display: none; }
+  .ptab { display: flex; align-items: center; gap: 8px; padding: 0 18px; cursor: pointer; font-size: 13px; color: #7a9cc8; border-bottom: 3px solid transparent; border-top: 3px solid transparent; transition: all .15s; white-space: nowrap; user-select: none; }
+  .ptab:hover { color: var(--white); background: rgba(255,255,255,.05); }
+  .ptab.active { color: var(--white); border-bottom-color: var(--accent); }
+  .ptab-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .topbar-meta { display: flex; align-items: center; font-size: 11px; color: #4a6a9a; padding-left: 16px; border-left: 1px solid rgba(255,255,255,.1); white-space: nowrap; margin-left: 8px; }
+
+  /* Content */
+  .content { flex: 1; overflow: hidden; position: relative; background: var(--cream); }
+
+  /* Overview */
+  #panel-overview { display: none; width: 100%; height: 100%; align-items: center; justify-content: center; flex-direction: column; gap: 28px; padding: 40px; overflow-y: auto; background: var(--cream); }
+  #panel-overview.active { display: flex; }
+  .ov-title { font-family: var(--font-display); font-size: 32px; color: var(--navy); text-align: center; }
+  .ov-sub { font-size: 14px; color: var(--text-muted); text-align: center; margin-top: 4px; }
+  .pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 820px; width: 100%; }
+  .pcard { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; cursor: pointer; transition: all .15s; display: flex; align-items: flex-start; gap: 12px; }
+  .pcard:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(30,95,190,.1); transform: translateY(-1px); }
+  .pcard-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .pcard-info { flex: 1; }
+  .pcard-name { font-family: var(--font-display); font-size: 15px; color: var(--navy); margin-bottom: 3px; }
+  .pcard-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+  .pcard-price { font-size: 13px; font-weight: 500; color: var(--blue); margin-bottom: 8px; }
+  .pcard-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .pctag { font-size: 10px; padding: 2px 7px; border-radius: 10px; background: var(--bg-section); color: var(--text-muted); border: 1px solid var(--border); }
+  .ov-note { font-size: 11px; color: var(--text-muted); }
+
+  /* Iframe panels */
+  .iframe-panel { display: none; width: 100%; height: 100%; border: none; }
+  .iframe-panel.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">ED<span>VISION</span>&nbsp; Partner Directory</div>
+  <div class="ptabs">
+    <div class="ptab active" data-id="overview" onclick="showPanel('overview', this)">🏠 Overview</div>
+    <div class="ptab" data-id="oxford" onclick="showPanel('oxford', this)"><div class="ptab-dot" style="background:#0369a1;"></div>Oxford International</div>
+    <div class="ptab" data-id="samiad" onclick="showPanel('samiad', this)"><div class="ptab-dot" style="background:#7c3aed;"></div>Samiad</div>
+    <div class="ptab" data-id="sbc" onclick="showPanel('sbc', this)"><div class="ptab-dot" style="background:#b45309;"></div>SBC</div>
+    <div class="ptab" data-id="adventure" onclick="showPanel('adventure', this)"><div class="ptab-dot" style="background:#1a6640;"></div>Adventure Camps</div>
+    <div class="ptab" data-id="stafford" onclick="showPanel('stafford', this)"><div class="ptab-dot" style="background:#be185d;"></div>Stafford House</div>
+  </div>
+  
+</div>
+
+<div class="content">
+
+  <!-- Overview -->
+  <div id="panel-overview" class="active">
+    <div>
+      <div class="ov-title">Partner Directory</div>
+      <div class="ov-sub">Short-term programme providers · Summer 2026 · Internal reference</div>
+    </div>
+    <div class="pgrid">
+      <div class="pcard" onclick="showPanel('oxford',null)">
+        <div class="pcard-dot" style="background:#0369a1;"></div>
+        <div class="pcard-info">
+          <div class="pcard-name">Oxford International</div>
+          <div class="pcard-meta">Language schools · All ages · Year-round · London & Oxford</div>
+          <div class="pcard-price">from £1,266/2 wks</div>
+          <div class="pcard-tags"><span class="pctag">London Greenwich</span><span class="pctag">Oxford</span><span class="pctag">English Language</span></div>
+        </div>
+      </div>
+      <div class="pcard" onclick="showPanel('samiad',null)">
+        <div class="pcard-dot" style="background:#7c3aed;"></div>
+        <div class="pcard-info">
+          <div class="pcard-name">Samiad</div>
+          <div class="pcard-meta">Summer school · Ages 6–18 · 7 campuses</div>
+          <div class="pcard-price">from £3,350/2 wks</div>
+          <div class="pcard-tags"><span class="pctag">Camp Samiad</span><span class="pctag">Summer School</span><span class="pctag">NxtGen at Eton</span></div>
+        </div>
+      </div>
+      <div class="pcard" onclick="showPanel('sbc',null)">
+        <div class="pcard-dot" style="background:#b45309;"></div>
+        <div class="pcard-info">
+          <div class="pcard-name">SBC</div>
+          <div class="pcard-meta">Academic + English · Ages 6–17 · 8 campuses</div>
+          <div class="pcard-price">from £2,770/2 wks</div>
+          <div class="pcard-tags"><span class="pctag">Eton</span><span class="pctag">Oxford College</span><span class="pctag">Cambridge</span></div>
+        </div>
+      </div>
+      <div class="pcard" onclick="showPanel('adventure',null)">
+        <div class="pcard-dot" style="background:#1a6640;"></div>
+        <div class="pcard-info">
+          <div class="pcard-name">Adventure Camps</div>
+          <div class="pcard-meta">Outdoor residential · Ages 8–17 · New Forest</div>
+          <div class="pcard-price">from £1,850/2 wks</div>
+          <div class="pcard-tags"><span class="pctag">Adventure Only</span><span class="pctag">English & Adventure</span><span class="pctag">Junior New Forest</span></div>
+        </div>
+      </div>
+      <div class="pcard" onclick="showPanel('stafford',null)">
+        <div class="pcard-dot" style="background:#be185d;"></div>
+        <div class="pcard-info">
+          <div class="pcard-name">Stafford House</div>
+          <div class="pcard-meta">Premium study holidays · Ages 12–17 · UK + USA</div>
+          <div class="pcard-price">from £2,770/2 wks</div>
+          <div class="pcard-tags"><span class="pctag">6 UK locations</span><span class="pctag">3 USA locations</span><span class="pctag">CATS Global Schools</span></div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Provider iframes — src set on first click to avoid loading all upfront -->
+  <iframe class="iframe-panel" id="panel-oxford"   data-src="oxford.html"></iframe>
+  <iframe class="iframe-panel" id="panel-samiad"   data-src="samiad.html"></iframe>
+  <iframe class="iframe-panel" id="panel-sbc"      data-src="sbc.html"></iframe>
+  <iframe class="iframe-panel" id="panel-adventure" data-src="adventure.html"></iframe>
+  <iframe class="iframe-panel" id="panel-stafford" data-src="stafford.html"></iframe>
+
+</div>
+
+<script>
+  function showPanel(id, tabEl) {
+    // Hide all
+    document.querySelectorAll('.iframe-panel, #panel-overview').forEach(function(el) {
+      el.classList.remove('active');
+    });
+    document.querySelectorAll('.ptab').forEach(function(t) {
+      t.classList.remove('active');
+    });
+
+    // Show target
+    var panel = document.getElementById('panel-' + id);
+    if (panel) {
+      panel.classList.add('active');
+      // Lazy load iframe src on first click
+      if (panel.tagName === 'IFRAME' && !panel.src && panel.dataset.src) {
+        panel.src = panel.dataset.src;
+      }
+    }
+
+    // Activate tab
+    if (tabEl) {
+      tabEl.classList.add('active');
+    } else {
+      var tab = document.querySelector('.ptab[data-id="' + id + '"]');
+      if (tab) tab.classList.add('active');
+    }
+  }
+</script>
+
+</body>
+</html>

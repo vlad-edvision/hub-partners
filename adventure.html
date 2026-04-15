@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adventure Camps — EDVISION Partner Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --navy-mid: #1a3560;
+    --blue: #1e5fbe;
+    --accent: #e8a020;
+    --accent-light: #f5c355;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+    --text: #0d1f3c;
+    --text-mid: #3a4d6b;
+    --text-muted: #7a8fa8;
+    --border: #dde4ef;
+    --bg-section: #f2f5fb;
+    --internal: #fff8ed;
+    --internal-border: #f5c355;
+    --internal-text: #7a4d00;
+    --margin-bg: #e8f5ee;
+    --margin-text: #1a6640;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    /* programme colours */
+    --adventure: #1a6640;
+    --adventure-bg: #e8f5ee;
+    --english: #0369a1;
+    --english-bg: #e0f2fe;
+    --junior: #7c3aed;
+    --junior-bg: #f3effe;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── Top bar ── */
+  
+
+  /* ── Layout ── */
+  .layout { display: flex; min-height: 100vh; }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: var(--navy);
+    padding: 32px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar-section-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5a7aaa;
+    padding: 0 24px 8px;
+    margin-top: 24px;
+  }
+  .sidebar-section-label:first-child { margin-top: 0; }
+  .sidebar a {
+    display: block;
+    padding: 9px 24px;
+    font-size: 13px;
+    color: #a8bcd8;
+    text-decoration: none;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .sidebar a:hover { color: var(--white); background: rgba(255,255,255,0.05); border-left-color: var(--accent); }
+
+  /* ── Main ── */
+  .main { flex: 1; padding: 40px 48px; max-width: 960px; }
+
+  /* ── Hero ── */
+  .provider-hero {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .provider-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(232,160,32,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .provider-logo-box {
+    width: 80px; height: 80px;
+    background: var(--white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--navy);
+    text-align: center;
+    line-height: 1.2;
+    padding: 8px;
+  }
+  .provider-hero-info { flex: 1; }
+  .provider-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .provider-tagline { font-size: 14px; color: #a8bcd8; margin-bottom: 16px; }
+  .provider-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .badge-accent { background: rgba(232,160,32,0.2); color: var(--accent-light); }
+  .badge-green { background: rgba(26,102,64,0.3); color: #7dd4a8; }
+  .badge-blue { background: rgba(30,95,190,0.3); color: #90beff; }
+
+  /* ── Internal note ── */
+  .internal-note {
+    background: var(--internal);
+    border: 1px solid var(--internal-border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .internal-note-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .internal-note-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--internal-text);
+    margin-bottom: 4px;
+  }
+  .internal-note p { font-size: 13px; color: var(--internal-text); }
+
+  /* ── Section ── */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  /* ── Quick facts ── */
+  .quick-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .fact-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .fact-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .fact-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  /* ── Programme cards ── */
+  .programme-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .programme-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .programme-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .programme-name {
+    font-family: var(--font-display);
+    font-size: 17px;
+    color: var(--navy);
+    flex: 1;
+  }
+  .programme-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .programme-meta-item { font-size: 13px; color: var(--text-mid); }
+  .programme-meta-item strong { color: var(--text); font-weight: 500; }
+  .programme-desc { font-size: 14px; color: var(--text-mid); margin-bottom: 16px; }
+
+  /* ── Price table ── */
+  .price-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .price-table th {
+    background: var(--bg-section);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .price-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-mid);
+  }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table .price-gross {
+    font-weight: 500;
+    color: var(--text);
+  }
+  .price-table .price-margin {
+    color: var(--margin-text);
+    font-weight: 500;
+    background: var(--margin-bg);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 13px;
+  }
+  .price-table .price-our {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── Collapsible ── */
+  .collapsible-trigger {
+    width: 100%;
+    background: var(--bg-section);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+    transition: background 0.15s;
+  }
+  .collapsible-trigger:hover { background: #e8edf6; }
+  .collapsible-trigger .arrow {
+    transition: transform 0.2s;
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+  .collapsible-trigger.open .arrow { transform: rotate(180deg); }
+  .collapsible-body {
+    display: none;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .collapsible-body.open { display: block; }
+
+  /* ── Timetable ── */
+  .timetable { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .timetable th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .timetable td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-mid);
+    vertical-align: top;
+  }
+  .timetable tr:nth-child(even) td { background: var(--bg-section); }
+  .timetable .time-col { font-weight: 500; color: var(--text-muted); white-space: nowrap; width: 110px; }
+  .timetable .bold-row td { font-weight: 600; color: var(--navy); background: #eef2fa !important; }
+
+  /* ── Activities grid ── */
+  .activities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .activity-tag {
+    padding: 4px 12px;
+    background: var(--bg-section);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--text-mid);
+  }
+
+  /* ── Transfers ── */
+  .transfer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .transfer-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .transfer-airport { font-weight: 500; color: var(--navy); margin-bottom: 8px; font-size: 14px; }
+  .transfer-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-mid); padding: 4px 0; border-bottom: 1px solid var(--border); }
+  .transfer-row:last-child { border-bottom: none; }
+  .transfer-price { font-weight: 500; color: var(--text); }
+
+  /* ── Info boxes ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .info-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .info-box-title { font-weight: 500; color: var(--navy); margin-bottom: 8px; font-size: 14px; }
+  .info-box ul { padding-left: 16px; }
+  .info-box li { font-size: 13px; color: var(--text-mid); margin-bottom: 4px; }
+
+  @media (max-width: 800px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: static; }
+    .main { padding: 24px 20px; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ── SIDEBAR ── -->
+  <nav class="sidebar">
+    <div class="sidebar-section-label">Provider</div>
+    <a href="#overview">Overview</a>
+    <a href="#programmes">Programmes</a>
+
+    <div class="sidebar-section-label">Programmes</div>
+    <a href="#adventure-only">🏕 Adventure Only</a>
+    <a href="#english-adventure">🗣 English &amp; Adventure</a>
+    <a href="#junior-newforest">🌳 Junior New Forest</a>
+
+    <div class="sidebar-section-label">Logistics</div>
+    <a href="#location">Location</a>
+    <a href="#transfers">Transfers</a>
+    <a href="#inclusions">What's Included</a>
+    <a href="#timetables">Timetables</a>
+    <a href="#notes">Internal Notes</a>
+  </nav>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- Hero -->
+    <div class="provider-hero" id="overview">
+      <div class="provider-logo-box">Educamps<br>Adventures</div>
+      <div class="provider-hero-info">
+        <div class="provider-name">Adventure Camps</div>
+        <div class="provider-tagline">Outdoor residential adventure camps — New Forest, South Coast &amp; beyond</div>
+        <div class="provider-badges">
+          <span class="badge badge-accent">Ages 8–17</span>
+          <span class="badge badge-green">Net Price (Gross model)</span>
+          <span class="badge badge-blue">Summer Season</span>
+          <span class="badge badge-accent">Foxlease Park, New Forest</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Internal note -->
+    <div class="internal-note">
+      <div class="internal-note-icon">🔒</div>
+      <div>
+        <div class="internal-note-label">Internal — Commercial Note</div>
+        <p>We work on a <strong>gross price model</strong> — provider quotes gross prices, we sell at gross (no markup needed). Confirm net vs gross per booking. Flexible partnership — programme mix can be discussed case by case. Free teacher places: <strong>1 per 15 students</strong>.</p>
+      </div>
+    </div>
+
+    <!-- Quick Facts -->
+    <div class="quick-facts">
+      <div class="fact-card">
+        <div class="fact-label">Age Range</div>
+        <div class="fact-value">8–17 years</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-label">Season</div>
+        <div class="fact-value">Summer (July–August)</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-label">Format</div>
+        <div class="fact-value">Residential (dorm)</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-label">Location</div>
+        <div class="fact-value">Foxlease Park, New Forest</div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-label">Supervision</div>
+        <div class="fact-value">24/7, ratio 1:8</div>
+      </div>
+
+      <div class="fact-card">
+        <div class="fact-label">Website</div>
+        <div class="fact-value"><a href="https://www.educampsadventures.co.uk" target="_blank" style="color: var(--blue);">educampsadventures.co.uk</a></div>
+      </div>
+      <div class="fact-card">
+        <div class="fact-label">Pricing Model</div>
+        <div class="fact-value">Gross (our margin = 0)</div>
+      </div>
+    </div>
+
+    <!-- ── PROGRAMMES ── -->
+    <div class="section" id="programmes">
+      <div class="section-title">Programmes</div>
+
+      <!-- 1. Adventure Only -->
+      <div class="programme-card" id="adventure-only">
+        <div class="programme-header">
+          <div class="programme-dot" style="background: var(--adventure);"></div>
+          <div class="programme-name">Adventure Only Camp</div>
+          <span class="badge" style="background: var(--adventure-bg); color: var(--adventure);">Ages 12–17</span>
+        </div>
+        <div class="programme-meta">
+          <div class="programme-meta-item">📅 <strong>Season:</strong> July–August</div>
+          <div class="programme-meta-item">🏕 <strong>Format:</strong> Fully residential (dorm)</div>
+          <div class="programme-meta-item">📍 <strong>Location:</strong> Foxlease Park, New Forest</div>
+        </div>
+        <div class="programme-desc">
+          Pure outdoor adventure — no English lessons. Full days of climbing, kayaking, archery, bushcraft, zip line, and more. Ideal for students who want immersive nature experience without the classroom element. All activities led by qualified instructors.
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Duration</th>
+                <th>Selling Price</th>
+                <th>Our Margin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1 week</td>
+                <td class="price-gross">£925</td>
+                <td><span class="price-margin">TBD</span></td>
+              </tr>
+              <tr>
+                <td>2 weeks</td>
+                <td class="price-gross">£1,850</td>
+                <td><span class="price-margin">TBD</span></td>
+              </tr>
+              <tr>
+                <td>3 weeks</td>
+                <td class="price-gross">£2,775</td>
+                <td><span class="price-margin">TBD</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <div class="fact-label" style="margin-bottom: 8px;">Activities include:</div>
+          <div class="activities-grid">
+            <span class="activity-tag">🧗 Climbing</span>
+            <span class="activity-tag">🏹 Archery</span>
+            <span class="activity-tag">🚣 Kayaking</span>
+            <span class="activity-tag">🌿 Bushcraft</span>
+            <span class="activity-tag">🪂 Zip Line</span>
+            <span class="activity-tag">🪵 Den Building</span>
+            <span class="activity-tag">🔭 Geocaching</span>
+            <span class="activity-tag">🛟 Raft Building</span>
+            <span class="activity-tag">🎯 Wide Games</span>
+            <span class="activity-tag">⛏ Tunnelling</span>
+            <span class="activity-tag">🪨 Bouldering</span>
+            <span class="activity-tag">🌙 Nightline</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. English & Adventure -->
+      <div class="programme-card" id="english-adventure">
+        <div class="programme-header">
+          <div class="programme-dot" style="background: var(--english);"></div>
+          <div class="programme-name">English &amp; Adventure</div>
+          <span class="badge" style="background: var(--english-bg); color: var(--english);">Ages 12–17</span>
+        </div>
+        <div class="programme-meta">
+          <div class="programme-meta-item">📅 <strong>Season:</strong> July–August</div>
+          <div class="programme-meta-item">🏕 <strong>Format:</strong> Fully residential (dorm)</div>
+          <div class="programme-meta-item">📍 <strong>Location:</strong> Foxlease Park, New Forest</div>
+        </div>
+        <div class="programme-desc">
+          Morning English language lessons + afternoon outdoor adventure activities. Best of both worlds — students improve English in a communicative, active environment and spend afternoons on climbing, kayaking, archery and more. Certificate included on completion.
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Duration</th>
+                <th>Selling Price</th>
+                <th>Our Margin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1 week</td>
+                <td class="price-gross">£980</td>
+                <td><span class="price-margin">TBD</span></td>
+              </tr>
+              <tr>
+                <td>2 weeks</td>
+                <td class="price-gross">£1,960</td>
+                <td><span class="price-margin">TBD</span></td>
+              </tr>
+              <tr>
+                <td>3 weeks</td>
+                <td class="price-gross">£2,940</td>
+                <td><span class="price-margin">TBD</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <div class="fact-label" style="margin-bottom: 8px;">Daily structure:</div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <div style="background: var(--english-bg); border-radius: 8px; padding: 10px 16px; font-size: 13px; color: var(--english);">
+              🌅 <strong>Morning</strong><br>English lessons
+            </div>
+            <div style="background: var(--adventure-bg); border-radius: 8px; padding: 10px 16px; font-size: 13px; color: var(--adventure);">
+              ☀️ <strong>Afternoon</strong><br>Outdoor adventure
+            </div>
+            <div style="background: var(--bg-section); border-radius: 8px; padding: 10px 16px; font-size: 13px; color: var(--text-mid);">
+              🌙 <strong>Evening</strong><br>Camp activities & social
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Junior New Forest Camp -->
+      <div class="programme-card" id="junior-newforest">
+        <div class="programme-header">
+          <div class="programme-dot" style="background: var(--junior);"></div>
+          <div class="programme-name">Junior New Forest Camp</div>
+          <span class="badge" style="background: var(--junior-bg); color: var(--junior);">Ages 8–11</span>
+          <span class="badge" style="background: var(--internal); color: var(--internal-text); border: 1px solid var(--internal-border); font-size: 11px;">🔒 Not in public brochures</span>
+        </div>
+
+        <div class="internal-note" style="margin-bottom: 14px;">
+          <div class="internal-note-icon">⚠️</div>
+          <div>
+            <div class="internal-note-label">Internal Note</div>
+            <p>This programme is <strong>not publicly advertised</strong> by Educamps Adventures — available through us directly. Week 1 (3–9 Aug) is residential at Foxlease Park. Week 2+ we offer Homestay + English lessons via our own arrangements. Structure is flexible — confirm details per enquiry.</p>
+          </div>
+        </div>
+
+        <div class="programme-meta">
+          <div class="programme-meta-item">📅 <strong>Week 1:</strong> 3–9 August (residential)</div>
+          <div class="programme-meta-item">📅 <strong>Week 2+:</strong> Homestay + English lessons</div>
+          <div class="programme-meta-item">📍 <strong>Location:</strong> Foxlease Park (Wk1) + Homestay</div>
+        </div>
+
+        <div class="programme-desc">
+          Designed for younger children (8–11) who are too young for the main camps. Week 1 is a fully residential adventure week at Foxlease Park in the New Forest. From week 2 onwards, we arrange homestay accommodation with daily English lessons — allowing families to extend the stay in the UK.
+        </div>
+
+        <button class="collapsible-trigger" style="cursor: default; pointer-events: none;">
+          💷 Prices
+        </button>
+        <div style="margin-bottom: 16px;">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Week</th>
+                <th>Type</th>
+                <th>Selling Price</th>
+                <th>Our Margin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Week 1 (3–9 Aug)</td>
+                <td>Residential camp</td>
+                <td class="price-gross">£950</td>
+                <td><span class="price-margin">TBD</span></td>
+              </tr>
+              <tr>
+                <td>Week 2+</td>
+                <td>Homestay + English lessons</td>
+                <td class="price-gross">£950</td>
+                <td><span class="price-margin">TBD</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── LOCATION ── -->
+    <div class="section" id="location">
+      <div class="section-title">Location</div>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-box-title">📍 Foxlease Park, New Forest</div>
+          <ul>
+            <li>65-acre site in the heart of the New Forest</li>
+            <li>Address: Clay Hill, Lyndhurst, SO43 7DE</li>
+            <li>Three residential buildings: The Lodge, The Barn, The Coach House</li>
+            <li>Shared dormitory rooms (2–14 per room), separate male/female</li>
+            <li>Spacious outdoor areas for activities</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">🛏 Accommodation</div>
+          <ul>
+            <li>Bunk beds or single beds</li>
+            <li>Communal spaces and outdoor recreation areas</li>
+            <li>Boys and girls in separate rooms</li>
+            <li>Students can request to share with a friend (same sex, subject to availability)</li>
+            <li>Comfortable, supervised, social environment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TRANSFERS ── -->
+    <div class="section" id="transfers">
+      <div class="section-title">Airport Transfers</div>
+      <div class="internal-note" style="margin-bottom: 16px;">
+        <div class="internal-note-icon">✈️</div>
+        <div>
+          <div class="internal-note-label">Transfer Policy</div>
+          <p>Flights should arrive <strong>before 12:00</strong> and depart <strong>after 12:00</strong> to fit standard transfer times. Out-of-hours transfers can be arranged at additional cost. Prices below are <strong>per person, return</strong>.</p>
+        </div>
+      </div>
+      <div class="transfer-grid">
+        <div class="transfer-card">
+          <div class="transfer-airport">✈️ Heathrow / Gatwick</div>
+          <div class="transfer-row">
+            <span>Before 12:00 arrival</span>
+            <span class="transfer-price">£125 pp return</span>
+          </div>
+          <div class="transfer-row">
+            <span>After 12:00 arrival</span>
+            <span class="transfer-price">£180 pp return</span>
+          </div>
+        </div>
+        <div class="transfer-card">
+          <div class="transfer-airport">✈️ Bournemouth</div>
+          <div class="transfer-row">
+            <span>Standard transfer</span>
+            <span class="transfer-price">£50 pp return</span>
+          </div>
+        </div>
+        <div class="transfer-card" style="border-color: var(--internal-border); background: var(--internal);">
+          <div class="transfer-airport" style="color: var(--internal-text);">⚠️ Other Airports</div>
+          <div style="font-size: 13px; color: var(--internal-text);">Contact provider directly to confirm availability and pricing for other airports.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INCLUSIONS ── -->
+    <div class="section" id="inclusions">
+      <div class="section-title">What's Included</div>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-box-title">✅ Included in all programmes</div>
+          <ul>
+            <li>Accommodation (residential dorm)</li>
+            <li>3 meals per day + snacks</li>
+            <li>All adventure activities</li>
+            <li>Excursions</li>
+            <li>24/7 supervision and camp leaders</li>
+            <li>End-of-course certificate</li>
+            <li>English lessons (English &amp; Adventure only)</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">❌ Not included</div>
+          <ul>
+            <li>Flights / travel to the UK</li>
+            <li>Travel &amp; medical insurance (mandatory — student's responsibility)</li>
+            <li>Airport transfers (priced separately)</li>
+            <li>Pocket money (recommend £50–£100)</li>
+            <li>Personal items and clothing</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">🍽 Dietary requirements</div>
+          <ul>
+            <li>Halal available</li>
+            <li>Vegetarian available</li>
+            <li>Gluten-free available</li>
+            <li>Allergies — declare on booking form</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title">👮 Safety &amp; Supervision</div>
+          <ul>
+            <li>Leader-to-child ratio: 1:8</li>
+            <li>DBS-checked, trained staff</li>
+            <li>Qualified instructors per activity</li>
+            <li>Designated Safeguarding Lead (DSL)</li>
+            <li>24-hour emergency contact line</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TIMETABLES ── -->
+    <div class="section" id="timetables">
+      <div class="section-title">Timetables</div>
+
+      <!-- Timetable 1: Adventure Only (& English & Adventure) -->
+      <div style="margin-bottom: 16px;">
+        <button class="collapsible-trigger" onclick="toggleCollapse(this)">
+          📅 Adventure Only &amp; English &amp; Adventure — Week 1 &amp; Week 2 <span class="arrow">▼</span>
+        </button>
+        <div class="collapsible-body">
+        <div style="padding: 16px;">
+        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Sun = Arrival / Departure day.</div>
+
+        <!-- Week 1 -->
+        <div style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;">Week 1</div>
+        <div style="overflow-x: auto; margin-bottom: 20px;">
+          <table class="timetable" style="min-width: 700px; font-size: 12px;">
+            <thead>
+              <tr>
+                <th style="width: 100px;">Time</th>
+                <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="time-col">07:00</td>
+                <td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td>
+              </tr>
+              <tr>
+                <td class="time-col">07:30–08:30</td>
+                <td>Arrival Day</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td>
+              </tr>
+              <tr>
+                <td class="time-col">09:00–10:30</td>
+                <td style="color:var(--text-muted);">Camp Arrival &amp; Icebreakers</td>
+                <td>High Ropes</td><td>New Forest Bike Ride</td><td>Archery</td><td>Explore Durdle Door</td><td>Abseiling</td><td>London Excursion</td><td style="color:var(--text-muted);">Departure</td>
+              </tr>
+              <tr>
+                <td class="time-col">11:00–12:00</td>
+                <td style="color:var(--text-muted);">Camp Arrival &amp; Icebreakers</td>
+                <td>Geocaching</td><td>New Forest Bike Ride</td><td>Ziplines</td><td>Explore Durdle Door</td><td>Tunnelling</td><td>London Excursion</td><td>—</td>
+              </tr>
+              <tr class="bold-row">
+                <td class="time-col">12:00–13:00</td>
+                <td>Lunch</td><td>Lunch</td><td>Forest Picnic</td><td>Lunch</td><td>Lunch</td><td>Lunch</td><td>Lunch</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">13:30–15:00</td>
+                <td style="color:var(--text-muted);">Camp Arrival &amp; Icebreakers</td>
+                <td>Kayaking</td><td>New Forest Bike Ride</td><td>Water Park</td><td>Explore Lulworth Cove</td><td>Raft Building</td><td>London Excursion</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">15:30–16:30</td>
+                <td style="color:var(--text-muted);">Camp Arrival &amp; Icebreakers</td>
+                <td>Nightline</td><td>Brockenhurst Pit Stop</td><td>Water Park</td><td>Explore Lulworth Cove</td><td>Bushcraft</td><td>London Excursion</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">16:30–18:00</td>
+                <td>—</td><td>Free Time</td><td>Free Time</td><td>—</td><td>—</td><td>Free Time</td><td>—</td><td>—</td>
+              </tr>
+              <tr class="bold-row">
+                <td class="time-col">18:00–19:00</td>
+                <td>Dinner</td><td>Dinner</td><td>Dinner</td><td>Dinner</td><td>Dinner</td><td>Dinner</td><td>Dinner</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">19:00–20:00</td>
+                <td>Team Games</td><td>Evening Activity</td><td>Campfires</td><td>Team Games</td><td>Frisbee Golf</td><td>Campfires</td><td>Sport Games</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">20:00–22:00</td>
+                <td>Free Time</td><td>Free Time</td><td>Free Time</td><td>Free Time</td><td>Free Time</td><td>Free Time</td><td>Free Time</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">22:00</td>
+                <td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Week 2 -->
+        <div style="font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;">Week 2</div>
+        <div style="overflow-x: auto;">
+          <table class="timetable" style="min-width: 700px; font-size: 12px;">
+            <thead>
+              <tr>
+                <th style="width: 100px;">Time</th>
+                <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="time-col">07:00</td>
+                <td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td>
+              </tr>
+              <tr>
+                <td class="time-col">07:30–08:30</td>
+                <td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td>
+              </tr>
+              <tr>
+                <td class="time-col">09:00–10:30</td>
+                <td style="color:var(--text-muted);">Arrival / Departure Day</td>
+                <td>High Ropes</td><td>New Forest Bike Ride</td><td>Fencing</td><td>Swanage Excursion</td><td>Climbing Wall</td><td>Oxford Excursion</td><td style="color:var(--text-muted);">Departure</td>
+              </tr>
+              <tr>
+                <td class="time-col">11:00–12:00</td>
+                <td style="color:var(--text-muted);">Arrival / Departure Day</td>
+                <td>Orienteering</td><td>New Forest Bike Ride</td><td>Shelter Building</td><td>Swanage Excursion</td><td>Nightline</td><td>Oxford Excursion</td><td>—</td>
+              </tr>
+              <tr class="bold-row">
+                <td class="time-col">12:00–13:00</td>
+                <td>Lunch</td><td>Lunch</td><td>Forest Picnic</td><td>Lunch</td><td>Lunch</td><td>Lunch</td><td>Lunch</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">13:30–15:00</td>
+                <td style="color:var(--text-muted); font-size:11px;">Southampton Titanic Museum (2-week students)</td>
+                <td>Canoeing</td><td>New Forest Bike Ride</td><td>Crate Stack Challenge</td><td>Steam Train &amp; Corfe Castle</td><td>Pioneering</td><td>Oxford Excursion</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">15:30–16:30</td>
+                <td style="color:var(--text-muted); font-size:11px;">Southampton Titanic Museum (2-week students)</td>
+                <td>Tunnelling</td><td>Brockenhurst Pit Stop</td><td>Camping Set Up</td><td>Steam Train &amp; Corfe Castle</td><td>Sports Day</td><td>Oxford Excursion</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">16:30–18:00</td>
+                <td style="color:var(--text-muted); font-size:11px;">Southampton Titanic Museum (2-week students)</td>
+                <td>Free Time</td><td>Free Time</td><td>Campfires &amp; Dampers</td><td>—</td><td>Free Time</td><td>—</td><td>—</td>
+              </tr>
+              <tr class="bold-row">
+                <td class="time-col">18:00–19:00</td>
+                <td>Dinner</td><td>Dinner</td><td>Dinner</td><td>Dinner</td><td>Dinner</td><td>Dinner</td><td>Dinner</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">19:00–20:00</td>
+                <td>Team Games</td><td>Wide Games</td><td>Campfires</td><td>Camping Games</td><td>Movie Night</td><td>Pizza Making</td><td>Disco Night</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">20:00–22:00</td>
+                <td>Free Time</td><td>Free Time</td><td>Free Time</td><td>Free Time</td><td>Free Time</td><td>Free Time</td><td>Free Time</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">22:00</td>
+                <td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div><!-- end padding -->
+        </div><!-- end collapsible-body -->
+      </div><!-- end Adventure Only block -->
+
+      <!-- Timetable 2: Junior New Forest -->
+      <div style="margin-bottom: 16px;">
+        <button class="collapsible-trigger" onclick="toggleCollapse(this)">
+          📅 Junior New Forest Camp — 3–9 August <span class="arrow">▼</span>
+        </button>
+        <div class="collapsible-body">
+        <div style="padding: 16px;">
+        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Mon arrival, Fri departure.</div>
+        <div style="overflow-x: auto;">
+          <table class="timetable" style="min-width: 580px;">
+            <thead>
+              <tr>
+                <th style="width: 110px;">Time</th>
+                <th>Mon 3 Aug</th><th>Tue 4 Aug</th><th>Wed 5 Aug</th><th>Thu 6 Aug</th><th>Fri 7 Aug</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="time-col">07:00</td>
+                <td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td><td>Wake Up</td>
+              </tr>
+              <tr>
+                <td class="time-col">07:30–08:30</td>
+                <td>Arrival Day</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td><td>Breakfast</td>
+              </tr>
+              <tr>
+                <td class="time-col">09:00–10:30</td>
+                <td>Icebreakers &amp; Team Building</td>
+                <td>Pioneering</td><td>New Arrivals</td><td>Crate Stack Challenge</td><td>Den Building</td>
+              </tr>
+              <tr>
+                <td class="time-col">11:00–12:30</td>
+                <td>Icebreakers &amp; Team Building</td>
+                <td>Raft Building</td><td>Icebreakers &amp; Team Building</td><td>Pioneering</td><td>Geocaching</td>
+              </tr>
+              <tr class="bold-row">
+                <td class="time-col">12:30–13:30</td>
+                <td>Lunch</td><td>Lunch</td><td>Lunch</td><td>Lunch</td><td>Lunch</td>
+              </tr>
+              <tr>
+                <td class="time-col">13:30–15:00</td>
+                <td>Tunnelling</td><td>Bushcraft</td><td>Nightline</td><td>Wide Games</td><td>Climbing</td>
+              </tr>
+              <tr>
+                <td class="time-col">15:30–17:00</td>
+                <td>Bouldering</td><td>Scavenger Hunt</td><td>Archery</td><td>Bushcraft</td><td>Zip Line</td>
+              </tr>
+              <tr>
+                <td class="time-col">18:00–19:00</td>
+                <td>Dinner</td><td>Dinner</td><td style="color:var(--text-muted); font-size:12px;">Departure / Dinner</td><td>Dinner</td><td style="color:var(--text-muted); font-size:12px;">Departure</td>
+              </tr>
+              <tr>
+                <td class="time-col">19:00–20:30</td>
+                <td>Flag Making</td><td>Sports</td><td>Movie Night</td><td>Crafts</td><td>—</td>
+              </tr>
+              <tr>
+                <td class="time-col">21:00</td>
+                <td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>Lights Out</td><td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div><!-- end padding -->
+        </div><!-- end collapsible-body -->
+      </div><!-- end Junior block -->
+    </div>
+
+    <!-- ── INTERNAL NOTES ── -->
+    <div class="section" id="notes">
+      <div class="section-title">Internal Notes</div>
+      <div class="internal-note">
+        <div class="internal-note-icon">🔒</div>
+        <div>
+          <div class="internal-note-label">Partnership Model</div>
+          <p>Flexible arrangement. Provider is <strong>family-run</strong> and open to bespoke programme discussion. We can potentially negotiate group rates for 10+ students.</p>
+        </div>
+      </div>
+      <div class="internal-note" style="margin-top: 8px;">
+        <div class="internal-note-icon">📋</div>
+        <div>
+          <div class="internal-note-label">Booking Process</div>
+          <p>Both individual and group bookings accepted. Partner agent bookings welcome. Contact provider for group quotes and availability. No specific CRM contact recorded yet — use website enquiry form or direct email.</p>
+        </div>
+      </div>
+      <div class="internal-note" style="margin-top: 8px;">
+        <div class="internal-note-icon">🔗</div>
+        <div>
+          <div class="internal-note-label">UKG Language Partnership</div>
+          <p>Educamps Adventures has a partnership with <strong>UKG Language</strong> — students can combine adventure camps with English language camps on the South Coast or New Forest. Useful for extended stays. Worth exploring for clients wanting a longer UK trip.</p>
+        </div>
+      </div>
+    </div>
+
+    
+
+  </main>
+</div>
+
+<script>
+  function toggleCollapse(btn) {
+    btn.classList.toggle('open');
+    const body = btn.nextElementSibling;
+    body.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

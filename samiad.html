@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samiad — EDVISION Partner Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --navy-mid: #1a3560;
+    --blue: #1e5fbe;
+    --accent: #e8a020;
+    --accent-light: #f5c355;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+    --text: #0d1f3c;
+    --text-mid: #3a4d6b;
+    --text-muted: #7a8fa8;
+    --border: #dde4ef;
+    --bg-section: #f2f5fb;
+    --internal: #fff8ed;
+    --internal-border: #f5c355;
+    --internal-text: #7a4d00;
+    --margin-bg: #e8f5ee;
+    --margin-text: #1a6640;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    /* programme colours */
+    --camp: #7c3aed;
+    --camp-bg: #f3effe;
+    --summer: #0369a1;
+    --summer-bg: #e0f2fe;
+    --nxtgen: #b45309;
+    --nxtgen-bg: #fef3c7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); background: var(--cream); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  
+
+  .layout { display: flex; min-height: 100vh; }
+
+  .sidebar { width: 220px; flex-shrink: 0; background: var(--navy); padding: 32px 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .sidebar-section-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #5a7aaa; padding: 0 24px 8px; margin-top: 24px; }
+  .sidebar-section-label:first-child { margin-top: 0; }
+  .sidebar a { display: block; padding: 9px 24px; font-size: 13px; color: #a8bcd8; text-decoration: none; transition: all 0.15s; border-left: 3px solid transparent; }
+  .sidebar a:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+  .sidebar a.active { color: var(--white); border-left-color: var(--accent); background: rgba(255,255,255,0.07); }
+  .sidebar a.dim { color: #3a5070; cursor: default; }
+
+  .main { flex: 1; padding: 40px 48px 80px; max-width: 960px; }
+
+  .provider-header { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+  .provider-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .provider-name { font-family: var(--font-display); font-size: 34px; color: var(--navy); line-height: 1.1; margin-bottom: 4px; }
+  .provider-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
+  .provider-url { font-size: 13px; color: var(--blue); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 16px; }
+  .provider-url:hover { text-decoration: underline; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; padding: 4px 12px; border-radius: 100px; font-weight: 400; }
+  .tag-blue { background: #dceaf9; color: #0d4a99; }
+  .tag-purple { background: #ede9fe; color: #5b21b6; }
+  .tag-amber { background: #fdf0d5; color: #7a4d00; }
+  .tag-teal { background: #d6f0e6; color: #0a5c38; }
+  .tag-gray { background: #e8edf5; color: #3a4d6b; }
+
+  .meta-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .meta-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .meta-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 4px; }
+  .meta-card .value { font-size: 15px; font-weight: 500; color: var(--navy); }
+
+  .section { margin-bottom: 48px; }
+  .section-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+
+  /* Programme tabs */
+  .prog-tabs { display: flex; gap: 6px; margin-bottom: 24px; flex-wrap: wrap; }
+  .prog-tab { padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--white); color: var(--text-mid); transition: all 0.15s; }
+  .prog-tab:hover:not(.active) { border-color: var(--navy-mid); color: var(--navy); }
+  .prog-tab.camp.active { background: var(--camp); color: #fff; border-color: var(--camp); }
+  .prog-tab.summer.active { background: var(--summer); color: #fff; border-color: var(--summer); }
+  .prog-tab.nxtgen.active { background: var(--nxtgen); color: #fff; border-color: var(--nxtgen); }
+  .prog-content { display: none; }
+  .prog-content.active { display: block; }
+
+  /* Programme badge */
+  .prog-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; margin-bottom: 16px; }
+  .prog-badge.camp { background: var(--camp-bg); color: var(--camp); }
+  .prog-badge.summer { background: var(--summer-bg); color: var(--summer); }
+  .prog-badge.nxtgen { background: var(--nxtgen-bg); color: var(--nxtgen); }
+
+  /* Campus cards */
+  .campus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .campus-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .campus-name { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+  .campus-loc { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+  .campus-dates { font-size: 12px; color: var(--text-mid); margin-bottom: 8px; }
+  .campus-dates strong { font-weight: 500; color: var(--navy); }
+  .campus-excursions { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+  .campus-excursions span { display: block; line-height: 1.5; }
+
+  /* Price tables */
+  .price-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+  .price-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
+  .price-table th { background: var(--navy); color: rgba(255,255,255,0.75); font-weight: 400; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 12px; text-align: left; white-space: nowrap; }
+  .price-table th:first-child { border-radius: 8px 0 0 0; }
+  .price-table th:last-child { border-radius: 0 8px 0 0; }
+  .price-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table tr:nth-child(even) td { background: var(--bg-section); }
+  .price-num { font-weight: 500; white-space: nowrap; color: var(--navy); }
+  .margin-cell { background: var(--margin-bg) !important; color: var(--margin-text); font-weight: 500; font-size: 12px; }
+  .margin-placeholder { font-size: 12px; color: var(--text-muted); font-style: italic; }
+  .campus-col { font-size: 11px; white-space: nowrap; }
+
+  /* Specialism table */
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 13px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 16px; }
+  .spec-table th { background: var(--bg-section); color: var(--text-mid); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; padding: 9px 12px; text-align: left; }
+  .spec-table td { padding: 9px 12px; border-top: 1px solid var(--border); color: var(--text); font-size: 13px; }
+  .spec-table tr:first-child td { border-top: none; }
+  .spec-table tr:nth-child(even) td { background: var(--bg-section); }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+
+  /* Transfers */
+  .transfer-scroll { overflow-x: auto; }
+  .transfer-table { border-collapse: collapse; font-size: 12px; min-width: 700px; width: 100%; }
+  .transfer-table th { background: var(--navy); color: rgba(255,255,255,0.7); font-weight: 400; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; padding: 8px 10px; text-align: center; white-space: nowrap; }
+  .transfer-table th:first-child { text-align: left; border-radius: 8px 0 0 0; }
+  .transfer-table th:last-child { border-radius: 0 8px 0 0; }
+  .transfer-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: center; color: var(--navy); font-weight: 500; }
+  .transfer-table td:first-child { text-align: left; color: var(--text-mid); font-weight: 400; }
+  .transfer-table tr:last-child td { border-bottom: none; }
+  .transfer-table tr:nth-child(even) td { background: var(--bg-section); }
+
+  /* Shuttle strip */
+  .shuttle-strip { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .shuttle-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 13px; }
+  .shuttle-item .s-label { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+  .shuttle-item .s-value { font-weight: 500; color: var(--navy); }
+
+  /* Notes */
+  .notes-box { background: var(--internal); border: 1px solid var(--internal-border); border-radius: 10px; padding: 16px 20px; font-size: 13px; color: var(--internal-text); line-height: 1.7; }
+  .notes-header { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .notes-row { margin-bottom: 4px; }
+  .notes-row strong { font-weight: 500; }
+
+  .disclaimer { font-size: 12px; color: var(--text-muted); margin-top: 10px; line-height: 1.6; padding: 10px 14px; background: var(--bg-section); border-radius: 8px; border-left: 3px solid var(--border); }
+
+  .sub-title { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 10px; margin-top: 20px; display: flex; align-items: center; gap: 8px; }
+  .sub-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 20px 60px; }
+    .meta-strip { grid-template-columns: 1fr 1fr; }
+    .campus-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-section-label">On this page</div>
+    <a href="#overview">Overview</a>
+    <a href="#programmes">Programmes</a>
+    <a href="#prices">Prices</a>
+    <a href="#specialisms">Specialisms</a>
+    <a href="#transfers">Transfers</a>
+    <a href="#online">Online English</a>
+    <a href="#notes">Internal Notes</a>
+  </nav>
+
+  <main class="main">
+
+    <!-- Header -->
+    <div class="provider-header" id="overview">
+      <div class="provider-eyebrow">Summer Schools · Provider Profile</div>
+      <h1 class="provider-name">Samiad</h1>
+      <div class="provider-sub">British Summer Schools · Est. 2013</div>
+      <a class="provider-url" href="https://www.samiad.com" target="_blank">samiad.com ↗</a>
+      <div class="tags">
+        <span class="tag tag-purple">Camp Samiad · 6–11</span>
+        <span class="tag tag-blue">Summer School · 11–17</span>
+        <span class="tag tag-amber">NxtGen · 14–18</span>
+        <span class="tag tag-teal">English · STEM · Leadership</span>
+        <span class="tag tag-gray">Net price</span>
+        <span class="tag tag-gray">Summer only</span>
+      </div>
+    </div>
+
+    <!-- Meta -->
+    <div class="meta-strip">
+      <div class="meta-card">
+        <div class="label">Business model</div>
+        <div class="value">Net price</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Season</div>
+        <div class="value">June – August</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Age range</div>
+        <div class="value">6–18 years</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Campuses</div>
+        <div class="value">7 UK locations</div>
+      </div>
+    </div>
+
+    <!-- Programmes & Campuses -->
+    <div class="section" id="programmes">
+      <div class="section-title">Programmes & Campuses 2026</div>
+
+      <div class="prog-tabs">
+        <button class="prog-tab camp active" onclick="switchProg('camp', this)">Camp Samiad · 6–11</button>
+        <button class="prog-tab summer" onclick="switchProg('summer', this)">Summer School · 11–17</button>
+        <button class="prog-tab nxtgen" onclick="switchProg('nxtgen', this)">NxtGen · 14–18</button>
+      </div>
+
+      <!-- Camp Samiad -->
+      <div class="prog-content active" id="prog-camp">
+        <div class="prog-badge camp">Camp Samiad — Fun, confidence & first independence · Ages 6–11</div>
+        <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">English lessons (15 hrs/week), activities, overnight excursions. 1:6 staff-to-student ratio, 24/7 pastoral care.</p>
+        <div class="campus-grid">
+          <div class="campus-card">
+            <div class="campus-name">Bromsgrove School</div>
+            <div class="campus-loc">West Midlands · Birmingham</div>
+            <div class="campus-dates"><strong>30 Jun – 28 Jul 2026</strong></div>
+            <div class="campus-excursions">
+              <span style="font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Excursions</span>
+              <span>London overnight · Theme park · Oxford · Warwick Castle</span>
+            </div>
+          </div>
+          <div class="campus-card">
+            <div class="campus-name">The Oratory School</div>
+            <div class="campus-loc">Oxfordshire</div>
+            <div class="campus-dates"><strong>5 Jul – 9 Aug 2026</strong></div>
+            <div class="campus-excursions">
+              <span style="font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Excursions</span>
+              <span>Warwick Castle overnight · London sightseeing & river cruise · Theme park · Oxford</span>
+            </div>
+          </div>
+          <div class="campus-card">
+            <div class="campus-name">RGS Surrey Hills</div>
+            <div class="campus-loc">Surrey</div>
+            <div class="campus-dates"><strong>5 Jul – 23 Aug 2026</strong></div>
+            <div class="campus-excursions">
+              <span style="font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Excursions</span>
+              <span>Warwick Castle overnight · London sightseeing & river cruise · Theme park · Brighton</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summer School -->
+      <div class="prog-content" id="prog-summer">
+        <div class="prog-badge summer">Samiad Summer School — Challenge & curiosity · Ages 11–17</div>
+        <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">Story-based interactive curriculum (Mission: Mars / Mission: Outbreak). Morning subject track (English, STEM, or Leadership · 15 hrs/week) + afternoon specialism. 1:6 ratio, overnight excursions.</p>
+        <div class="campus-grid">
+          <div class="campus-card">
+            <div class="campus-name">Bromsgrove School</div>
+            <div class="campus-loc">West Midlands · Birmingham</div>
+            <div class="campus-dates"><strong>30 Jun – 28 Jul 2026</strong></div>
+            <div class="campus-excursions">
+              <span style="font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Excursions</span>
+              <span>London overnight · Theme park · Oxford · Warwick Castle</span>
+            </div>
+          </div>
+          <div class="campus-card">
+            <div class="campus-name">The Leys School</div>
+            <div class="campus-loc">Cambridge</div>
+            <div class="campus-dates"><strong>1 Jul – 29 Jul 2026</strong></div>
+            <div class="campus-excursions">
+              <span style="font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Excursions</span>
+              <span>Immersive Cambridge experiences · 2 full days in London</span>
+            </div>
+          </div>
+          <div class="campus-card">
+            <div class="campus-name">Marlborough College</div>
+            <div class="campus-loc">Wiltshire</div>
+            <div class="campus-dates"><strong>5 Jul – 9 Aug 2026</strong></div>
+            <div class="campus-excursions">
+              <span style="font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Excursions</span>
+              <span>London overnight (Thames dinner & disco) · Cotswold Country Park · Oxford · Safari Park</span>
+            </div>
+          </div>
+          <div class="campus-card">
+            <div class="campus-name">The Oratory School</div>
+            <div class="campus-loc">Oxfordshire</div>
+            <div class="campus-dates"><strong>5 Jul – 9 Aug 2026</strong></div>
+            <div class="campus-excursions">
+              <span style="font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Excursions</span>
+              <span>Warwick Castle overnight · London sightseeing & river cruise · Theme park · Oxford</span>
+            </div>
+          </div>
+          <div class="campus-card">
+            <div class="campus-name">RGS Surrey Hills</div>
+            <div class="campus-loc">Surrey</div>
+            <div class="campus-dates"><strong>5 Jul – 23 Aug 2026</strong></div>
+            <div class="campus-excursions">
+              <span style="font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Excursions</span>
+              <span>Warwick Castle overnight · London sightseeing & river cruise · Theme park · Brighton</span>
+            </div>
+          </div>
+          <div class="campus-card">
+            <div class="campus-name">Trent College</div>
+            <div class="campus-loc">Nottingham</div>
+            <div class="campus-dates"><strong>5 Jul – 23 Aug 2026</strong></div>
+            <div class="campus-excursions">
+              <span style="font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)">Excursions</span>
+              <span>London overnight (Thames dinner & disco) · Cambridge · Alton Towers · York</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NxtGen -->
+      <div class="prog-content" id="prog-nxtgen">
+        <div class="prog-badge nxtgen">Samiad NxtGen — Leadership & preparation · Ages 14–18</div>
+        <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">2-week future-skills programme. Week 1: Digital & Creative Futures. Week 2: Global & Personal Futures. Workshops, team projects, Model UN showcase. Portfolio work for university applications.</p>
+        <div class="campus-grid">
+          <div class="campus-card" style="border-color:#e9d9fc;">
+            <div class="campus-name">Eton College</div>
+            <div class="campus-loc">Windsor, Berkshire</div>
+            <div class="campus-dates"><strong>29 Jun – 13 Jul 2026</strong></div>
+            <div style="margin-top:8px;font-size:12px;color:var(--text-mid)">All single rooms · Pool · Climbing wall · Fencing salle · Tennis & squash</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prices -->
+    <div class="section" id="prices">
+      <div class="section-title">2-Week Prices 2026 (GBP) — Base programme fee</div>
+
+      <div class="sub-title">Samiad NxtGen · 14–18 years · Eton College</div>
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead><tr><th>Programme</th><th>Campus</th><th>Dates</th><th>2-week price</th><th style="background:#1a3560">Our margin</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>NxtGen programme</td>
+              <td class="campus-col">Eton College</td>
+              <td class="campus-col">29 Jun – 13 Jul</td>
+              <td class="price-num">£4,600</td>
+              <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sub-title">Samiad Summer School · 11–17 years</div>
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead><tr><th>Subject track</th><th>Trent</th><th>Marlborough</th><th>RGS Surrey</th><th>Oratory</th><th>Bromsgrove</th><th>Leys</th><th style="background:#1a3560">Our margin</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>English</strong></td>
+              <td class="price-num">£3,350</td>
+              <td class="price-num">£3,500</td>
+              <td class="price-num">£3,600</td>
+              <td class="price-num">£3,500</td>
+              <td class="price-num">£3,350</td>
+              <td class="price-num">£3,800</td>
+              <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+            </tr>
+            <tr>
+              <td><strong>STEM</strong></td>
+              <td class="price-num">£3,650</td>
+              <td class="price-num">£3,800</td>
+              <td class="price-num">£3,900</td>
+              <td class="price-num">£3,800</td>
+              <td class="price-num">£3,750</td>
+              <td class="price-num">—</td>
+              <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+            </tr>
+            <tr>
+              <td><strong>Leadership</strong></td>
+              <td class="price-num">£3,650</td>
+              <td class="price-num">£3,800</td>
+              <td class="price-num">£3,900</td>
+              <td class="price-num">£3,800</td>
+              <td class="price-num">£3,750</td>
+              <td class="price-num">—</td>
+              <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sub-title">Camp Samiad · 6–11 years</div>
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead><tr><th>Programme</th><th>RGS Surrey Hills</th><th>Oratory School</th><th>Bromsgrove School</th><th style="background:#1a3560">Our margin</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>English</strong></td>
+              <td class="price-num">£3,600</td>
+              <td class="price-num">£3,500</td>
+              <td class="price-num">£3,350</td>
+              <td class="margin-cell"><span class="margin-placeholder">— to add</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="disclaimer">All prices are for 2-week residential programmes (full board). Prices listed are the net price we pay. Additional weeks may be added at pro-rata weekly rates.</div>
+    </div>
+
+    <!-- Specialisms -->
+    <div class="section" id="specialisms">
+      <div class="section-title">Afternoon Specialisms — Add-on price per week (GBP)</div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">Students choose one afternoon specialism on top of their morning subject track. Each specialism provides minimum 12 hours/week of dedicated sessions.</p>
+      <div class="price-table-wrap">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Specialism</th>
+              <th>Eton</th>
+              <th>Trent</th>
+              <th>Marlborough</th>
+              <th>RGS Surrey</th>
+              <th>Oratory</th>
+              <th>Bromsgrove</th>
+              <th>Leys</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Multi-Activity</td><td>—</td><td>+£0</td><td>+£0</td><td>+£0</td><td>+£0</td><td>+£0</td><td>+£0</td></tr>
+            <tr><td>Intensive English</td><td>—</td><td>+£175</td><td>+£175</td><td>+£175</td><td>+£175</td><td>+£175</td><td>—</td></tr>
+            <tr><td>PSG Academy (football)</td><td>—</td><td>—</td><td>—</td><td>+£300</td><td>+£300</td><td>—</td><td>—</td></tr>
+            <tr><td>Horse Riding</td><td>—</td><td>+£250</td><td>—</td><td>+£300</td><td>+£300</td><td>+£250</td><td>—</td></tr>
+            <tr><td>Tennis</td><td>—</td><td>+£200</td><td>—</td><td>—</td><td>+£200</td><td>—</td><td>—</td></tr>
+            <tr><td>Golf</td><td>—</td><td>—</td><td>+£200</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Robotics</td><td>—</td><td>—</td><td>+£200</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>London Explorer</td><td>+£0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Art</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>+£200</td><td>—</td></tr>
+            <tr><td>Basketball</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>+£200</td><td>—</td></tr>
+            <tr><td style="border-top:2px solid var(--border);font-style:italic;color:var(--text-muted)">En-suite supplement</td><td>—</td><td>—</td><td>—</td><td>+£150</td><td>—</td><td>+£150</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Transfers -->
+    <div class="section" id="transfers">
+      <div class="section-title">Airport Transfers</div>
+
+      <div class="sub-title">Shared shuttle (standard arrival/departure dates)</div>
+      <div class="shuttle-strip">
+        <div class="shuttle-item"><div class="s-label">Airport</div><div class="s-value">Heathrow & Gatwick</div></div>
+        <div class="shuttle-item"><div class="s-label">Cost</div><div class="s-value">£30 each way</div></div>
+        <div class="shuttle-item"><div class="s-label">Arrival window</div><div class="s-value">09:00 – 18:00</div></div>
+        <div class="shuttle-item"><div class="s-label">Departure window</div><div class="s-value">12:00 – 21:00</div></div>
+        <div class="shuttle-item"><div class="s-label">Unaccompanied Minor (UM)</div><div class="s-value">+£40 each way</div></div>
+      </div>
+
+      <div class="sub-title">Private transfers — per campus (GBP, one-way)</div>
+      <div class="transfer-scroll">
+        <table class="transfer-table">
+          <thead>
+            <tr>
+              <th>Campus</th>
+              <th>Heathrow</th>
+              <th>Gatwick</th>
+              <th>Stansted</th>
+              <th>Birmingham</th>
+              <th>Manchester</th>
+              <th>Luton</th>
+              <th>London City</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Eton College</td><td>£100</td><td>£75</td><td>£200</td><td>£275</td><td>£400</td><td>£150</td><td>£125</td></tr>
+            <tr><td>Trent College</td><td>£275</td><td>£325</td><td>£275</td><td>£150</td><td>£150</td><td>£250</td><td>£325</td></tr>
+            <tr><td>RGS Surrey Hills</td><td>£85</td><td>£80</td><td>£175</td><td>£300</td><td>£400</td><td>£150</td><td>£125</td></tr>
+            <tr><td>Marlborough College</td><td>£250</td><td>£275</td><td>£400</td><td>£250</td><td>£400</td><td>£325</td><td>£300</td></tr>
+            <tr><td>The Oratory School</td><td>£125</td><td>£175</td><td>£200</td><td>£200</td><td>£350</td><td>£150</td><td>£175</td></tr>
+            <tr><td>The Leys School</td><td>£125</td><td>£175</td><td>£80</td><td>£200</td><td>£350</td><td>£80</td><td>£125</td></tr>
+            <tr><td>Bromsgrove School</td><td>£250</td><td>£300</td><td>£300</td><td>£125</td><td>£250</td><td>£250</td><td>£275</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="disclaimer">Insurance available at +£12/week per student.</div>
+    </div>
+
+    <!-- Online English (Tudor School) -->
+    <div class="section" id="online">
+      <div class="section-title">Online English — Tudor School (add-on)</div>
+      <p style="font-size:13px;color:var(--text-mid);margin-bottom:16px;">Available year-round, ages 4+. 1:1 or group. Cambridge English curriculum. Summer school students receive 15% discount.</p>
+      <div class="price-table-wrap">
+        <table class="price-table" style="min-width:400px">
+          <thead>
+            <tr><th>Package</th><th>Standard price</th><th>Summer student price (−15%)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>×10 lessons (50 min)</td><td class="price-num">£290</td><td class="price-num">£246</td></tr>
+            <tr><td>×20 lessons (50 min)</td><td class="price-num">£560</td><td class="price-num">£476</td></tr>
+            <tr><td>×30 lessons (50 min)</td><td class="price-num">£810</td><td class="price-num">£688</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Internal Notes -->
+    <div class="section" id="notes">
+      <div class="section-title">Internal Notes</div>
+      <div class="notes-box">
+        
+        <div class="notes-row"><strong>Business model:</strong> Net price — we buy at net, sell to client at our price. Margin to be defined per programme.</div>
+        <div class="notes-row"><strong>Margin:</strong> To be defined — update once agreed.</div>
+        <div class="notes-row"><strong>Contact:</strong> — to add</div>
+        <div class="notes-row"><strong>Booking:</strong> 50% deposit to secure; 14-day hold without payment. Full fee due 8 weeks before arrival.</div>
+        <div class="notes-row"><strong>Key selling points:</strong> World's first story-based interactive curriculum (Mission: Mars, Mission: Outbreak). PSG Academy affiliation. Eton College campus for NxtGen is a premium sell. Unique overnight excursions (Warwick Castle glamping, Thames ball).</div>
+        <div class="notes-row"><strong>Notes:</strong> Day camp option available at all campuses (9am–6pm, non-residential).</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function switchProg(id, btn) {
+    document.querySelectorAll('.prog-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.prog-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('prog-' + id).classList.add('active');
+  }
+</script>
+</body>
+</html>

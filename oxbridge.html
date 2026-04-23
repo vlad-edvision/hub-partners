@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oxbridge Scholars — EDVISION Partner Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --navy-mid: #1a3560;
+    --blue: #1e5fbe;
+    --accent: #e8a020;
+    --accent-light: #f5c355;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+    --text: #0d1f3c;
+    --text-mid: #3a4d6b;
+    --text-muted: #7a8fa8;
+    --border: #dde4ef;
+    --bg-section: #f2f5fb;
+    --internal: #fff8ed;
+    --internal-border: #f5c355;
+    --internal-text: #7a4d00;
+    --margin-bg: #e8f5ee;
+    --margin-text: #1a6640;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    /* Oxbridge brand colour */
+    --ox: #6b3f8c;
+    --ox-light: #f0e8f8;
+    --ox-mid: #8b5fb0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); background: var(--cream); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  .layout { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar { width: 220px; flex-shrink: 0; background: var(--navy); padding: 32px 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .sidebar-section-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #5a7aaa; padding: 0 24px 8px; margin-top: 24px; }
+  .sidebar-section-label:first-child { margin-top: 0; }
+  .sidebar a { display: block; padding: 9px 24px; font-size: 13px; color: #a8bcd8; text-decoration: none; transition: all 0.15s; border-left: 3px solid transparent; }
+  .sidebar a:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+  .sidebar a.active { color: var(--white); border-left-color: var(--accent); background: rgba(255,255,255,0.07); }
+
+  /* Main */
+  .main { flex: 1; padding: 40px 48px 80px; max-width: 960px; }
+
+  /* Header */
+  .provider-header { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+  .provider-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .provider-name { font-family: var(--font-display); font-size: 34px; color: var(--navy); line-height: 1.1; margin-bottom: 4px; }
+  .provider-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
+  .provider-url { font-size: 13px; color: var(--blue); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 16px; }
+  .provider-url:hover { text-decoration: underline; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; padding: 4px 12px; border-radius: 100px; font-weight: 400; }
+  .tag-purple { background: #ede9fe; color: #5b21b6; }
+  .tag-blue { background: #dceaf9; color: #0d4a99; }
+  .tag-amber { background: #fdf0d5; color: #7a4d00; }
+  .tag-teal { background: #d6f0e6; color: #0a5c38; }
+  .tag-gray { background: #e8edf5; color: #3a4d6b; }
+  .tag-ox { background: var(--ox-light); color: var(--ox); }
+
+  /* Commercial note */
+  .commercial-note { background: var(--internal); border: 1px solid var(--internal-border); border-radius: 10px; padding: 14px 18px; margin-bottom: 32px; font-size: 13px; color: var(--internal-text); display: flex; gap: 10px; align-items: flex-start; }
+  .commercial-note .lock { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .commercial-note strong { font-weight: 500; }
+
+  /* Meta strip */
+  .meta-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .meta-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .meta-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 4px; }
+  .meta-card .value { font-size: 15px; font-weight: 500; color: var(--navy); }
+
+  /* Section */
+  .section { margin-bottom: 48px; }
+  .section-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+
+  /* Subject track cards */
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .track-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .track-icon { font-size: 22px; margin-bottom: 10px; }
+  .track-name { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+  .track-desc { font-size: 13px; color: var(--text-mid); line-height: 1.5; margin-bottom: 12px; }
+  .track-tutor { font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 10px; }
+  .track-tutor strong { color: var(--navy); font-weight: 500; }
+
+  /* Sessions */
+  .session-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .session-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; }
+  .session-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 4px; }
+  .session-dates { font-size: 15px; font-weight: 500; color: var(--navy); }
+  .session-duration { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Programme structure blocks */
+  .structure-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+  .structure-block { background: var(--bg-section); border-radius: 10px; padding: 16px 18px; }
+  .structure-block .sb-label { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+  .structure-block .sb-hours { font-size: 11px; color: var(--ox); font-weight: 500; margin-bottom: 8px; }
+  .structure-block .sb-desc { font-size: 12px; color: var(--text-mid); line-height: 1.5; }
+
+  /* Schedule table */
+  .schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 8px; }
+  .schedule-table th { background: var(--navy); color: rgba(255,255,255,0.7); font-weight: 400; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 9px 12px; text-align: left; }
+  .schedule-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text-mid); vertical-align: top; }
+  .schedule-table tr:last-child td { border-bottom: none; }
+  .schedule-table tr:nth-child(even) td { background: var(--bg-section); }
+  .schedule-table .time-col { font-weight: 500; color: var(--navy); white-space: nowrap; }
+
+  /* Excursions */
+  .excursion-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .excursion-pill { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px; font-size: 12px; color: var(--text-mid); }
+
+  /* Outcomes list */
+  .outcomes-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .outcomes-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--text-mid); }
+  .outcomes-list li::before { content: '✓'; color: var(--ox); font-weight: 500; flex-shrink: 0; margin-top: 1px; }
+
+  /* Price table */
+  .price-table-wrap { overflow-x: auto; margin-bottom: 16px; }
+  .price-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 400px; }
+  .price-table th { background: var(--navy); color: rgba(255,255,255,0.75); font-weight: 400; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 12px; text-align: left; white-space: nowrap; }
+  .price-table th:first-child { border-radius: 8px 0 0 0; }
+  .price-table th:last-child { border-radius: 0 8px 0 0; }
+  .price-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-table tr:nth-child(even) td { background: var(--bg-section); }
+  .price-num { font-weight: 500; white-space: nowrap; color: var(--navy); }
+  .margin-cell { background: var(--margin-bg) !important; }
+  .margin-placeholder { font-size: 12px; color: var(--margin-text); font-style: italic; }
+  .price-note { font-size: 12px; color: var(--text-muted); font-style: italic; padding: 8px 0; }
+  .strikethrough { text-decoration: line-through; color: var(--text-muted); }
+  .early-bird { color: var(--ox); font-weight: 500; }
+
+  /* Disclaimer */
+  .disclaimer { font-size: 12px; color: var(--text-muted); margin-top: 20px; padding: 12px 16px; background: var(--bg-section); border-radius: 8px; line-height: 1.6; }
+
+  /* Sidebar scroll spy */
+  if (window.self !== window.top) {
+    /* inside iframe — hide nothing, topbar already removed */
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-section-label">On this page</div>
+    <a href="#overview" onclick="scrollToAnchor('#overview')">Overview</a>
+    <a href="#programmes" onclick="scrollToAnchor('#programmes')">Subject Tracks</a>
+    <a href="#structure" onclick="scrollToAnchor('#structure')">Programme Structure</a>
+    <a href="#accommodation" onclick="scrollToAnchor('#accommodation')">Accommodation</a>
+    <a href="#prices" onclick="scrollToAnchor('#prices')">Prices</a>
+    <a href="#notes" onclick="scrollToAnchor('#notes')">Internal Notes</a>
+  </nav>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Header -->
+    <div class="provider-header" id="overview">
+      <div class="provider-eyebrow">Academic Summer Programmes · Provider Profile</div>
+      <div class="provider-name">Oxbridge Scholars</div>
+      <div class="provider-sub">Pre-university summer programme · Queens' College, Cambridge</div>
+      <a href="https://oxbridge-scholars.co.uk" target="_blank" class="provider-url">oxbridge-scholars.co.uk ↗</a>
+      <div class="tags">
+        <span class="tag tag-ox">Medicine · AI · Business</span>
+        <span class="tag tag-blue">Ages 14–17</span>
+        <span class="tag tag-purple">Queens' College Cambridge</span>
+        <span class="tag tag-teal">2 weeks</span>
+        <span class="tag tag-amber">Summer only</span>
+        <span class="tag tag-gray">Net price</span>
+      </div>
+    </div>
+
+    <!-- Commercial note -->
+    <div class="commercial-note">
+      <span class="lock">🔒</span>
+      <span><strong>Commercial note:</strong> Net price model — our margin to be confirmed. Full retail price £5,395 / early bird £4,590 (deadline 31 Jan 2026, likely passed). Oxbridge Scholars is a new provider — first cohort Summer 2026. Positions us well for high-intent academic families (Medicine, AI, Business tracks).</span>
+    </div>
+
+    <!-- Meta strip -->
+    <div class="meta-strip">
+      <div class="meta-card">
+        <div class="label">Business Model</div>
+        <div class="value">Net price</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Season</div>
+        <div class="value">July – August</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Age Range</div>
+        <div class="value">14–17 years</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Location</div>
+        <div class="value">Cambridge</div>
+      </div>
+    </div>
+
+    <!-- Subject tracks -->
+    <div class="section" id="programmes">
+      <div class="section-title">Subject Tracks 2026 — students choose one per session</div>
+
+      <div class="track-grid">
+        <div class="track-card">
+          <div class="track-icon">🩺</div>
+          <div class="track-name">Medicine</div>
+          <div class="track-desc">Human anatomy, physiology, pathology, clinical communication and medical ethics. Practical tutorials cover vital signs, patient histories, symptom interpretation. Team project: develop a pharmaceutical product. Optional surgical workshop (suturing, aseptic techniques).</div>
+          <div class="track-tutor"><strong>Tutor:</strong> Dr Kalvind Vadi — Biomedical Science (St George's), Medicine (Keele). Founded international education programme reaching 34,000+ students.</div>
+        </div>
+        <div class="track-card">
+          <div class="track-icon">🤖</div>
+          <div class="track-name">AI & Computer Science</div>
+          <div class="track-desc">Algorithms, data science, cybersecurity, large language models. Python programming (+ HTML/C++ depending on level). Hands-on mini-projects: building algorithms, working with datasets, simulating AI use cases. Ethics: bias, data privacy, automation impact.</div>
+          <div class="track-tutor"><strong>Tutor:</strong> Mr Bobby Sohal — microelectronic engineer, 20+ years designing tech for global organisations and government agencies. Founder, Design by Chip.</div>
+        </div>
+        <div class="track-card">
+          <div class="track-icon">📊</div>
+          <div class="track-name">Business & Finance</div>
+          <div class="track-desc">Strategic planning, ethical leadership, marketing, financial management, global operations. Students develop business plans, evaluate ethical dilemmas, create marketing campaigns, analyse global markets. Financial concepts: budgeting, forecasting, investment strategies.</div>
+          <div class="track-tutor"><strong>Tutor:</strong> Mr Matthew Imison — economics educator and former finance professional with global experience across UK, Asia and Africa.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Programme structure -->
+    <div class="section" id="structure">
+      <div class="section-title">Programme Structure — 2-week residential</div>
+
+      <div class="structure-grid">
+        <div class="structure-block">
+          <div class="sb-label">Subject Tutorials</div>
+          <div class="sb-hours">24 hours total</div>
+          <div class="sb-desc">Small-group, university-style sessions with expert tutors. Each student produces a final essay or project and receives written feedback and a tailored letter of recommendation.</div>
+        </div>
+        <div class="structure-block">
+          <div class="sb-label">Industry Project</div>
+          <div class="sb-hours">12 hours total</div>
+          <div class="sb-desc">Working in small teams, students tackle a real-world challenge connected to their chosen subject. Supported by industry partners. Concludes with group presentations and a Certificate of Completion.</div>
+        </div>
+        <div class="structure-block">
+          <div class="sb-label">Guest Speaker Sessions</div>
+          <div class="sb-hours">3 hours total</div>
+          <div class="sb-desc">Each week, students hear from a leading voice in academia, business, tech or medicine — offering big-picture thinking, inspiration and a glimpse into real-world impact.</div>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top: 28px;">Sample Daily Schedule</div>
+      <div class="price-table-wrap">
+        <table class="schedule-table">
+          <thead><tr><th>Time</th><th>Activity</th></tr></thead>
+          <tbody>
+            <tr><td class="time-col">08:00</td><td>Breakfast in the dining hall</td></tr>
+            <tr><td class="time-col">09:00 – 10:30</td><td>Subject tutorials</td></tr>
+            <tr><td class="time-col">10:45 – 12:15</td><td>Academic project time</td></tr>
+            <tr><td class="time-col">12:30</td><td>Lunch in the dining hall</td></tr>
+            <tr><td class="time-col">14:00 – 16:00</td><td>Industry workshops</td></tr>
+            <tr><td class="time-col">16:00 – 17:30</td><td>Free time / 1:1 support / speaker sessions</td></tr>
+            <tr><td class="time-col">18:30</td><td>Dinner</td></tr>
+            <tr><td class="time-col">Evening</td><td>Social activity or guided study</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-title" style="margin-top: 28px;">Weekend Excursions (sample)</div>
+      <div class="excursion-list">
+        <span class="excursion-pill">London Eye & Westminster</span>
+        <span class="excursion-pill">Oxford & Christ Church College</span>
+        <span class="excursion-pill">Cambridge Punting</span>
+        <span class="excursion-pill">Hampton Court Palace</span>
+        <span class="excursion-pill">Warwick Castle</span>
+      </div>
+    </div>
+
+    <!-- Accommodation -->
+    <div class="section" id="accommodation">
+      <div class="section-title">Accommodation & Student Life — Queens' College, Cambridge</div>
+      <p style="font-size:14px; color:var(--text-mid); margin-bottom:16px;">Students stay on-site at Queens' College — one of the oldest colleges in Cambridge. Meals served in the historic dining hall. Round-the-clock supervision and pastoral care.</p>
+      <div class="meta-strip">
+        <div class="meta-card">
+          <div class="label">Rooms</div>
+          <div class="value">Private or shared</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Meals</div>
+          <div class="value">All included</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Supervision</div>
+          <div class="value">24/7 pastoral care</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Dietary needs</div>
+          <div class="value">All catered for</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prices -->
+    <div class="section" id="prices">
+      <div class="section-title">Prices 2026 — Retail (GBP) · Net price agreement to be confirmed</div>
+
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Session</th>
+              <th>Dates</th>
+              <th>Duration</th>
+              <th>Full Price</th>
+              <th>Early Bird</th>
+              <th style="background:#1a3560">Our margin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Session 1</td>
+              <td>5 Jul – 18 Jul 2026</td>
+              <td>2 weeks</td>
+              <td class="price-num">£5,395</td>
+              <td class="price-num early-bird">£4,590 <span style="font-weight:400;font-size:11px;color:var(--text-muted)">(deadline passed)</span></td>
+              <td class="margin-cell"><span class="margin-placeholder">— to confirm</span></td>
+            </tr>
+            <tr>
+              <td>Session 2</td>
+              <td>19 Jul – 1 Aug 2026</td>
+              <td>2 weeks</td>
+              <td class="price-num">£5,395</td>
+              <td class="price-num early-bird">£4,590 <span style="font-weight:400;font-size:11px;color:var(--text-muted)">(deadline passed)</span></td>
+              <td class="margin-cell"><span class="margin-placeholder">— to confirm</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-note">Price includes: accommodation at Queens' College, all meals, subject tutorials (24h), industry project (12h), guest speaker sessions, weekend excursions, certificate of completion, letter of recommendation. Excludes: flights, airport transfers.</div>
+
+      <div class="disclaimer">Eligibility: ages 14–17 from any country. No specific academic qualifications required. Places limited, allocated first-come basis. Application: oxbridge-scholars.co.uk</div>
+    </div>
+
+    <!-- What students leave with -->
+    <div class="section">
+      <div class="section-title">Programme Outcomes</div>
+      <ul class="outcomes-list">
+        <li>Deeper understanding of chosen subject (Medicine / AI / Business)</li>
+        <li>Hands-on experience through an industry project with Certificate of Completion</li>
+        <li>Practised collaboration, communication and academic writing</li>
+        <li>Experience of life at a world-leading university (Queens' College, Cambridge — #1 Complete University Guide 2025)</li>
+        <li>Tailored written feedback and personalised letter of recommendation from senior tutor</li>
+        <li>International peer network from around the world</li>
+        <li>Clarity on personal and academic goals — university applications, A-level choices, career direction</li>
+      </ul>
+    </div>
+
+    <!-- Internal notes -->
+    <div class="section" id="notes">
+      <div class="section-title">Internal Notes</div>
+      <div class="commercial-note">
+        <span class="lock">📋</span>
+        <div>
+          <p style="margin-bottom:8px;"><strong>New provider — Summer 2026 launch.</strong> Net/gross pricing model and our commission structure to be confirmed directly with provider.</p>
+          <p style="margin-bottom:8px;"><strong>Target client profile:</strong> Ambitious 14–17 year olds from UAE, Nigeria, Russia, Turkey. Families specifically interested in Medicine, AI or Business pathways. Strong fit for our "immersion programme" segment.</p>
+          <p style="margin-bottom:8px;"><strong>Positioning:</strong> Higher price point than standard summer camps (£5,395) — closer to Samiad NxtGen / Oxford College territory. Sell on prestige (Queens' College), career-linked content and the letter of recommendation.</p>
+          <p><strong>Contact:</strong> enquiries@oxbridge-scholars.co.uk · oxbridge-scholars.co.uk</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // Hide topbar when in iframe
+  if (window.self !== window.top) {
+    // already no topbar in this file
+  }
+
+  function scrollToAnchor(selector) {
+    const el = document.querySelector(selector);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Sidebar active state on scroll
+  const sections = ['overview','programmes','structure','accommodation','prices','notes'];
+  const links = {};
+  sections.forEach(id => {
+    links[id] = document.querySelector('.sidebar a[href="#' + id + '"]');
+  });
+
+  window.addEventListener('scroll', () => {
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < 120) current = id;
+    });
+    sections.forEach(id => {
+      if (links[id]) links[id].classList.toggle('active', id === current);
+    });
+  }, { passive: true });
+
+  // Set first link active on load
+  if (links[sections[0]]) links[sections[0]].classList.add('active');
+</script>
+
+</body>
+</html>
